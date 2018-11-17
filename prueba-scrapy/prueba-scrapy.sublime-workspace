@@ -149,45 +149,35 @@
 			}
 		},
 		{
-			"file": "amazon_test/urls.json",
-			"settings":
-			{
-				"buffer_size": 8782,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "amazon_test/urls2.json",
-			"settings":
-			{
-				"buffer_size": 16652,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "amazon_test/amazon_test/spiders/test_spider.py",
 			"settings":
 			{
-				"buffer_size": 944,
+				"buffer_size": 954,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "amazon_test/prueba.json",
+			"file": "amazon_test/urls_firstpage.json",
 			"settings":
 			{
-				"buffer_size": 11889,
-				"encoding": "UTF-8",
+				"buffer_size": 8777,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/C/Users/dani_/Desktop/test.txt",
+			"file": "amazon_test/test_firstpage.json",
 			"settings":
 			{
-				"buffer_size": 740,
+				"buffer_size": 11628,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/D/_TFG/TFG-Amazon-Scraper/.gitignore",
+			"settings":
+			{
+				"buffer_size": 1251,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -198,14 +188,6 @@
 			{
 				"buffer_size": 86,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "amazon_test/test_firstpage.json",
-			"settings":
-			{
-				"buffer_size": 43027,
-				"line_ending": "Unix"
 			}
 		}
 	],
@@ -298,12 +280,16 @@
 	],
 	"file_history":
 	[
+		"/D/_TFG/instrucciones.txt",
+		"/D/_TFG/TFG-Amazon-Scraper/prueba-scrapy/amazon_test/test_firstpage.json",
+		"/D/_TFG/TFG-Amazon-Scraper/prueba-scrapy/amazon_test/urls.json",
+		"/D/_TFG/TFG-Amazon-Scraper/prueba-scrapy/amazon_test/urls2.json",
+		"/D/_TFG/TFG-Amazon-Scraper/prueba-scrapy/amazon_test/prueba.json",
+		"/C/Users/dani_/Desktop/test.txt",
+		"/D/_TFG/TFG-Amazon-Scraper/prueba-scrapy/amazon_test/pruebas.py",
 		"/C/Users/dani_/AppData/Local/Temp/Rar$DIa3248.23175/README.txt",
 		"/C/Users/dani_/Desktop/suma.py",
 		"/D/VMware VM/Ubuntu 16.04.vmx",
-		"/D/_TFG/instrucciones.txt",
-		"/D/_TFG/TFG-Amazon-Scraper/prueba-scrapy/amazon_test/pruebas.py",
-		"/D/_TFG/TFG-Amazon-Scraper/prueba-scrapy/amazon_test/urls2.json",
 		"/C/Users/dani_/Desktop/gamerostv/index.html",
 		"/C/Users/dani_/Desktop/gamerostv/css/style.css",
 		"/C/Users/dani_/Desktop/testpage/css/style.css",
@@ -365,7 +351,7 @@
 	],
 	"find":
 	{
-		"height": 30.0
+		"height": 70.0
 	},
 	"find_in_files":
 	{
@@ -423,7 +409,7 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -480,85 +466,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "amazon_test/urls.json",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8782,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								1066
-							]
-						],
-						"settings":
-						{
-							"SL.15.region_keys":
-							[
-							],
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
-							"word_wrap": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
 					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "amazon_test/urls2.json",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 16652,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								807,
-								807
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
-							"word_wrap": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
+					"buffer": 1,
 					"file": "amazon_test/amazon_test/spiders/test_spider.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 944,
+						"buffer_size": 954,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								47,
-								47
+								269,
+								269
 							]
 						],
 						"settings":
@@ -598,76 +523,16 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "amazon_test/prueba.json",
+					"buffer": 2,
+					"file": "amazon_test/urls_firstpage.json",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11889,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1037,
-								1110
-							]
-						],
-						"settings":
-						{
-							"SL.17.region_keys":
-							[
-							],
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
-							"word_wrap": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "/C/Users/dani_/Desktop/test.txt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 740,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								740,
-								740
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "/D/_TFG/instrucciones.txt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 86,
+						"buffer_size": 8777,
 						"regions":
 						{
 						},
@@ -680,37 +545,6 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "amazon_test/test_firstpage.json",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 43027,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								25538,
-								25538
-							]
-						],
-						"settings":
-						{
-							"SL.16.region_keys":
-							[
-							],
 							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
 							"word_wrap": true
 						},
@@ -718,7 +552,94 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "amazon_test/test_firstpage.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11628,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11628,
+								11628
+							]
+						],
+						"settings":
+						{
+							"SL.25.region_keys":
+							[
+							],
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
+						},
+						"translation.x": 9.0,
+						"translation.y": 368.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/D/_TFG/TFG-Amazon-Scraper/.gitignore",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1251,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1233,
+								1233
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/zzz A File Icon zzz/aliases/Shell Script (Git).sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1673.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/D/_TFG/instrucciones.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 86,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								86,
+								86
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				}
 			]

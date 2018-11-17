@@ -105,3 +105,4 @@ venv.bak/
 
 # Sublime
 *.sublime-project
+*.sublime-workspace
