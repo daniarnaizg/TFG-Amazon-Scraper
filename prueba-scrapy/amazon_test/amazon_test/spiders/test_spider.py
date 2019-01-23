@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
-import scrapy, json, re
-import js2xml 
-
+import scrapy, json, re, js2xml 
 
 class TestSpiderSpider(scrapy.Spider):
     name = 'test_spider'
     allowed_domains = ['amazon.com']
 
     list_urls = []
-    with open('urls_firstpage.json') as json_data:
+    with open('first500urls.json') as json_data:
     	urls = json.load(json_data)
     	for i in range(len(urls)):
     		list_urls = list_urls + urls[i]['page_urls']
