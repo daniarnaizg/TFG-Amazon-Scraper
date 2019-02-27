@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for amazon_test project
+# Scrapy settings for amazon project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,14 +9,14 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'amazon_test'
+BOT_NAME = 'amazon'
 
-SPIDER_MODULES = ['amazon_test.spiders']
-NEWSPIDER_MODULE = 'amazon_test.spiders'
+SPIDER_MODULES = ['amazon.spiders']
+NEWSPIDER_MODULE = 'amazon.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'amazon_test (+http://www.yourdomain.com)'
+#USER_AGENT = 'amazon (+http://www.yourdomain.com)'
 # USER_AGENT = "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.93 Safari/537.36"
 USER_AGENT = "Mozilla/5.0 (X11; Linux i686; rv:64.0) Gecko/20100101 Firefox/64.0"
 
@@ -50,13 +50,13 @@ DOWNLOAD_DELAY = random.uniform(1, 2.9)
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'amazon_test.middlewares.AmazonTestSpiderMiddleware': 543,
+#    'amazon.middlewares.AmazonTestSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'amazon_test.middlewares.AmazonTestDownloaderMiddleware': 543,
+#    'amazon.middlewares.AmazonTestDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -68,7 +68,7 @@ DOWNLOAD_DELAY = random.uniform(1, 2.9)
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    'amazon_test.pipelines.AmazonTestPipeline': 300,
+#    'amazon.pipelines.AmazonTestPipeline': 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)

@@ -6,7 +6,7 @@ Script usado para arreglar el JSON generado por dataturks apra su correcto funci
 
 def main():
 
-    with open("first500products_tagged_dataturks.json", "r") as f:
+    with open("../outputs/first500products_tagged_dataturks.json", "r") as f:
         s = f.read()
     res = re.sub("\}\n\{", "},{", s)
     f.close()

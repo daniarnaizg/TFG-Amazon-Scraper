@@ -9,7 +9,7 @@ def main():
 
     new_dict = {}
 
-    with open("first500products.json", "r") as f:
+    with open("../outputs/first500products.json", "r") as f:
         fdata = json.load(f)
 
     for i in range(len(fdata)):
