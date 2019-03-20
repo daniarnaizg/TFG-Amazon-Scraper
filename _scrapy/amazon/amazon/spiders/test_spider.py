@@ -23,6 +23,15 @@ class TestSpiderSpider(scrapy.Spider):
 		item['asin'] = re.search(r"/\w{10}/", response.url).group(0).strip('/')
 
 		item['rating'] = response.xpath('//*[@id="acrPopover"]/span[1]/a/i[1]/span/text()').extract()[0][:3]
+
+		item['description'] = response.xpath('//*[@id="productDescription"]/p/text()').extract()[0]
+
+		item['reviews'] = int(response.xpath('//*[@id="acrCustomerReviewText"]/text()').extract()[0].split(' ')[0].replace(',',''))
+
+		item['brand'] = response.xpath('//*[@id="brand"]/@href').extract()[0].split('/')[1]
+
+		item['pricerange'] = response.xpath('//*[@id="priceblock_ourprice"]/text()').extract()[0]
+
 		
 		# Imagenes
 		js = response.xpath("//script[contains(text(), 'register(\"ImageBlockATF\"')]/text()").extract_first()
