@@ -11,14 +11,19 @@ def requestImg(image_name, url):
 
     i = Image.open(BytesIO(r.content))
     i.save(image_name)
+    # i.save("dataset/" + image_name)
+
 
 def main():
-    with open("../outputs/test.json", "r") as f:
+    with open("../outputs/first500final.json", "r") as f:
         data = json.load(f)
 
     for i in range(len(data)):
-        url = data[i]['content']
-        label = data[0]["annotation"]["labels"][0]
+        # url = data[i]['content']
+        # label = data[0]["annotation"]["labels"][0]
+
+        url = data[str(i)]['URL']
+        label = data[str(i)]['LABEL']
         image_name = str(i) + "_" + label + ".jpg"
         requestImg(image_name, url)
 
