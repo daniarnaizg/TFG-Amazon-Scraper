@@ -7,8 +7,12 @@
 
 import scrapy
 
-
-class AmazonTestItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class AmazonItem(scrapy.Item):
+    asin = scrapy.Field()
+    rating = scrapy.Field()
+    description = scrapy.Field()
+    reviews = scrapy.Field()
+    brand = scrapy.Field()
+    pricerange = scrapy.Field()
+    image_urls = scrapy.Field()
+    comments = scrapy.Field()

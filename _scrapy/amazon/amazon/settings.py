@@ -50,13 +50,13 @@ DOWNLOAD_DELAY = random.uniform(1, 2.9)
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'amazon.middlewares.AmazonTestSpiderMiddleware': 543,
+#    'amazon.middlewares.AmazonSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'amazon.middlewares.AmazonTestDownloaderMiddleware': 543,
+#    'amazon.middlewares.AmazonDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -67,9 +67,9 @@ DOWNLOAD_DELAY = random.uniform(1, 2.9)
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'amazon.pipelines.AmazonTestPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'amazon.pipelines.AmazonPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
