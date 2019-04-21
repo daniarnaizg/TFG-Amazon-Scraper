@@ -26,11 +26,15 @@ class TestSpiderSpider(scrapy.Spider):
 
 		item['rating'] = response.xpath('//*[@id="acrPopover"]/span[1]/a/i[1]/span/text()').extract()[0][:3]
 
-		item['description'] = response.xpath('//*[@id="productDescription"]/p/text()').extract()[0]
+		try:
+			item['description'] = response.xpath('//*[@id="productDescription"]/p/text()').extract()[0]
+		except IndexError:
+			print('There is no description.')
+			item['description'] = 'N/A'
 
 		item['reviews'] = int(response.xpath('//*[@id="acrCustomerReviewText"]/text()').extract()[0].split(' ')[0].replace(',',''))
-
-		item['brand'] = response.xpath('//*[@id="brand"]/@href').extract()[0].split('/')[1]
+		
+		item['brand'] = response.xpath('//*[@id="bylineInfo_feature_div"]/div/a/@href').extract()[0].split('/')[1]
 
 		item['pricerange'] = response.xpath('//*[@id="priceblock_ourprice"]/text()').extract()[0]
 		

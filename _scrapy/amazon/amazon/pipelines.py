@@ -48,14 +48,14 @@ class AmazonPipeline(object):
 
     def createImagesTable(self):
         self.curr.execute("""CREATE TABLE IF NOT EXISTS IMAGE_URLS(
-                        asin TEXT FOREIGN KEY NOT NULL,
+                        asin TEXT FOREING KEY NOT NULL,
                         url TEXT
                         )""")
 
 
     def createCommentsTable(self):
         self.curr.execute("""CREATE TABLE IF NOT EXISTS COMMENTS(
-                        asin TEXT FOREIGN KEY NOT NULL,
+                        asin TEXT FOREING KEY NOT NULL,
                         comment TEXT
                         )""")
 

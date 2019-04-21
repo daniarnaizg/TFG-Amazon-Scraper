@@ -8,7 +8,7 @@ class CommentsSpiderSpider(scrapy.Spider):
     name = 'comments_spider'
     allowed_domains = ['amazon.com']
     start_urls = ['http://amazon.com/']
-    n_comment_pages = 2
+    n_comment_pages = 1
 
     list_urls = []
     with open('../../outputs/test_productsWithDB.json') as json_data:
@@ -25,9 +25,10 @@ class CommentsSpiderSpider(scrapy.Spider):
         item = AmazonItem()
         item['asin'] = re.search(r"/\w{10}/", response.url).group(0).strip('/')
 
-        # item['comments'] = response.xpath("//*[contains(@class, 'a-size-base review-text review-text-content')]/span/text()").extract()
-        item['comments'] = response.xpath("//*[contains(@class, 'a-row a-spacing-small review-data')]/span/span/text()").extract()
-
-        # print(item['comments'][0])
+        raw_comments = response.xpath("//*[contains(@class, 'a-row a-spacing-small review-data')]/span/span").extract()
+        comment_list = []
+        for i in raw_comments:
+            comment_list.append(re.sub('<.*?>', '', i))     # Regular expression to delete all html tags
+        item['comments'] = comment_list
 
         yield item
