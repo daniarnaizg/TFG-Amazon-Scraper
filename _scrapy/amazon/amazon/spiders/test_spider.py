@@ -33,7 +33,7 @@ class TestSpiderSpider(scrapy.Spider):
 			item['description'] = 'N/A'
 
 		item['reviews'] = int(response.xpath('//*[@id="acrCustomerReviewText"]/text()').extract()[0].split(' ')[0].replace(',',''))
-		
+
 		item['brand'] = response.xpath('//*[@id="bylineInfo_feature_div"]/div/a/@href').extract()[0].split('/')[1]
 
 		item['pricerange'] = response.xpath('//*[@id="priceblock_ourprice"]/text()').extract()[0]
