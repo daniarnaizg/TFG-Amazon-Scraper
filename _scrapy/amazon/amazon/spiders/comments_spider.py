@@ -11,7 +11,7 @@ class CommentsSpiderSpider(scrapy.Spider):
     n_comment_pages = 1
 
     list_urls = []
-    with open('../../outputs/test_productsWithDB.json') as json_data:
+    with open('../../outputs/test_women_products.json') as json_data:
         products = json.load(json_data)
         for i in range(len(products)):
             asin = products[i]['asin']

@@ -38,6 +38,7 @@ class AmazonPipeline(object):
     def createAmazonTable(self):
         self.curr.execute("""CREATE TABLE IF NOT EXISTS MAIN_AMAZON(
                         asin TEXT PRIMARY KEY NOT NULL,
+                        sex TEXT,
                         rating TEXT,
                         description TEXT,
                         reviews INTEGER,
@@ -79,8 +80,9 @@ class AmazonPipeline(object):
         return item
 
     def storeProductInDb(self, item):
-        self.curr.execute("""INSERT INTO MAIN_AMAZON VALUES( ?, ?, ?, ?, ?, ?)""",(
+        self.curr.execute("""INSERT INTO MAIN_AMAZON VALUES( ?, ?, ?, ?, ?, ?, ?)""",(
             item['asin'],
+            item['sex'],
             item['rating'],
             item['description'],
             item['reviews'],

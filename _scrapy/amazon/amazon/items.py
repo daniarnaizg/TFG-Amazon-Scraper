@@ -9,6 +9,7 @@ import scrapy
 
 class AmazonItem(scrapy.Item):
     asin = scrapy.Field()
+    sex = scrapy.Field()
     rating = scrapy.Field()
     description = scrapy.Field()
     reviews = scrapy.Field()
