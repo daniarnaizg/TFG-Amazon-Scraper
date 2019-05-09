@@ -6,8 +6,8 @@ import js2xml
 from urllib.parse import urljoin
 from amazon.items import AmazonItem
 
-class TestSpiderSpider(scrapy.Spider):
-	name = 'test_spider'
+class ProductsSpider(scrapy.Spider):
+	name = 'products_spider'
 	allowed_domains = ['amazon.com']
 	
 	list_urls = []
@@ -24,13 +24,19 @@ class TestSpiderSpider(scrapy.Spider):
 		
 		item['asin'] = re.search(r"/\w{10}/", response.url).group(0).strip('/')
 
-		item['sex'] = 'Woman' if response.url[-1] is 'w' else 'Man'  # Male/Female mejor?????
+		item['sex'] = 'Female' if response.url[-1] is 'F' else 'Male'
 
 		item['rating'] = response.xpath('//*[@id="acrPopover"]/span[1]/a/i[1]/span/text()').extract()[0][:3]
 
 		item['reviews'] = int(response.xpath('//*[@id="acrCustomerReviewText"]/text()').extract()[0].split(' ')[0].replace(',',''))
 
-		item['brand'] = response.xpath('//*[@id="bylineInfo_feature_div"]/div/a/@href').extract()[0].split('/')[1]  # TODO:Sacar con /text en vez del link
+		# Brand
+		try:
+			item['brand'] = response.xpath('//*[@id="bylineInfo"]/text()').extract()[0] 								# Nombre de la marca sin imagen
+		except IndexError:
+			item['brand'] = response.xpath('//*[@id="bylineInfo_feature_div"]/div/a/@href').extract()[0].split('/')[1]	# Nombre de la marca con imagen
+		except:
+			item['brand'] = 'N/A'
 
 		item['pricerange'] = response.xpath('//*[@id="priceblock_ourprice"]/text()').extract()[0]
 

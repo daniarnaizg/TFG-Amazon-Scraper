@@ -3,7 +3,7 @@ import scrapy, re
 from urllib.parse import urljoin
 
 
-class UrlsSpiderSpider(scrapy.Spider):
+class UrlsSpider(scrapy.Spider):
     name = 'urls_spider'
     allowed_domains = ['amazon.com']
     n_pages = 1
@@ -28,11 +28,9 @@ class UrlsSpiderSpider(scrapy.Spider):
             asin = re.search(r"/\w{10}/", i)
             if asin is not None:
                 if response.url in self.women_urls:               
-                    url_list.append(urljoin('https://www.amazon.com/','dp/' + asin.group(0).strip('/') + '/w'))
+                    url_list.append(urljoin('https://www.amazon.com/','dp/' + asin.group(0).strip('/') + '/F'))
                 else:
-                    url_list.append(urljoin('https://www.amazon.com/','dp/' + asin.group(0).strip('/') + '/m'))
-
-        # print(url_list)
+                    url_list.append(urljoin('https://www.amazon.com/','dp/' + asin.group(0).strip('/') + '/M'))
 
         yield{
             'page_urls': list(set(url_list)) # PARA QUITAR DUPLICADOS

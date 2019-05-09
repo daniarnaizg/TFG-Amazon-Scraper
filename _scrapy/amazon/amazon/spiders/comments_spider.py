@@ -4,7 +4,7 @@ from urllib.parse import urljoin
 from amazon.items import AmazonItem
 
 
-class CommentsSpiderSpider(scrapy.Spider):
+class CommentsSpider(scrapy.Spider):
     name = 'comments_spider'
     allowed_domains = ['amazon.com']
     start_urls = ['http://amazon.com/']
