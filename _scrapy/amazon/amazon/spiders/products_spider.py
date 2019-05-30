@@ -11,7 +11,7 @@ class ProductsSpider(scrapy.Spider):
 	allowed_domains = ['amazon.com']
 	
 	list_urls = []
-	with open('../../outputs/test_women_urls.json') as json_data:
+	with open('../../outputs/1K-Male-Female-URLS.json') as json_data:
 		urls = json.load(json_data)
 		for i in range(len(urls)):
 			list_urls = list_urls + urls[i]['page_urls']
@@ -22,13 +22,29 @@ class ProductsSpider(scrapy.Spider):
 
 		item = AmazonItem()
 		
+		# ASIN
 		item['asin'] = re.search(r"/\w{10}/", response.url).group(0).strip('/')
 
+		# Sex
 		item['sex'] = 'Female' if response.url[-1] is 'F' else 'Male'
 
-		item['rating'] = response.xpath('//*[@id="acrPopover"]/span[1]/a/i[1]/span/text()').extract()[0][:3]
+		# Price range
+		try:
+			item['pricerange'] = response.xpath('//*[@id="priceblock_ourprice"]/text()').extract()[0]
+		except IndexError:
+			item['rating'] = 'N/A'
 
-		item['reviews'] = int(response.xpath('//*[@id="acrCustomerReviewText"]/text()').extract()[0].split(' ')[0].replace(',',''))
+		# Rating
+		try:
+			item['rating'] = response.xpath('//*[@id="acrPopover"]/span[1]/a/i[1]/span/text()').extract()[0][:3]
+		except IndexError:
+			item['rating'] = 'N/A'
+
+		# Number of reviews
+		try:
+			item['reviews'] = int(response.xpath('//*[@id="acrCustomerReviewText"]/text()').extract()[0].split(' ')[0].replace(',',''))
+		except KeyError:
+			item['rating'] = 'N/A'
 
 		# Brand
 		try:
@@ -38,9 +54,7 @@ class ProductsSpider(scrapy.Spider):
 		except:
 			item['brand'] = 'N/A'
 
-		item['pricerange'] = response.xpath('//*[@id="priceblock_ourprice"]/text()').extract()[0]
-
-		# Descripciones
+		# Descriptions
 		try:
 			item['description'] = response.xpath('//*[@id="productDescription"]/p/text()').extract()[0]
 		except IndexError:

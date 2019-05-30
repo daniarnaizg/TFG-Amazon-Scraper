@@ -6,15 +6,17 @@ Script que saca la primera url de cada producto pasado en un json y lo añade a 
 
 def main():
 
-    with open("first500products.json", "r") as f:
+    with open("../outputs/1K-Male-Female-PRODUCTS.json", "r") as f:
         data = json.load(f)
 
-    with open("urls-list.txt", "a") as urls_list:
+    with open("1K-Male-Female-url_list.txt", "a") as urls_list:
 
         for i in range(len(data)):
             urls = data[i]['image_urls']
-            first_url = urls[0]
-            urls_list.write(first_url + "\n")
+            for j in urls:
+                urls_list.write(j + "\n")
+            # first_url = urls[0]
+            # urls_list.write(first_url + "\n")
 
 if __name__ == '__main__':
     main()
