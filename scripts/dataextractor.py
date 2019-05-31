@@ -1,4 +1,4 @@
-import json, requests
+import json, requests, os
 from PIL import Image
 from io import BytesIO
 
@@ -8,23 +8,30 @@ Script que descarga imagenes dada su URL y las renombra en funcion de cómo han 
 
 def requestImg(image_name, url):
     r = requests.get(url)
-
     i = Image.open(BytesIO(r.content))
-    i.save(image_name)
-    # i.save("dataset/" + image_name)
+    
+    if image_name[0] is 'M':
+        i.save("D:\_TFG\TFG-Amazon-Scraper\datasets\dataset-modelo/Modelo/" + image_name)
+    else:
+        i.save("D:\_TFG\TFG-Amazon-Scraper\datasets\dataset-modelo/SinModelo/" + image_name)
 
 
 def main():
-    with open("../outputs/first500final.json", "r") as f:
+    with open("../outputs/1K-Male-Female-Dataturks-MODEL-fixed.json", "r") as f:
         data = json.load(f)
 
-    for i in range(len(data)):
-        # url = data[i]['content']
-        # label = data[0]["annotation"]["labels"][0]
+    for i in range(len(data) - 1):
 
-        url = data[str(i)]['URL']
-        label = data[str(i)]['LABEL']
-        image_name = str(i) + "_" + label + ".jpg"
+        # print(str(i))
+        try:
+            url = data[i]['content']
+            label = data[i]['annotation']['labels'][0]
+        except IndexError:
+            print(str(i))
+
+        image_name = label + '_' + str(i) + '.jpg'
+
+        # print(url, label, image_name)
         requestImg(image_name, url)
 
 
