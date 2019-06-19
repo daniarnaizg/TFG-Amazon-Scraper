@@ -1,0 +1,31 @@
+\capitulo{2}{Objetivos del proyecto}
+
+Este apartado explica de forma precisa y concisa cuales son los objetivos que se persiguen con la realización del proyecto. Se puede distinguir entre los objetivos marcados por los requisitos del software a construir y los objetivos de carácter técnico que plantea a la hora de llevar a la práctica el proyecto.
+
+\section{Objetivos de carácter general}
+
+El principal objetivo de este proyecto es la creación de varias herramientas capaces de extraer y procesar información sobre un familia de productos concreta de Amazon, en este caso camisetas, para su posterior uso en estudio de mercado.
+
+A su vez este proceso está divido en diferentes fases que podemos identificar como objetivos secundarios:
+
+\begin{itemize}
+	\item Ser capaz de extraer información de los distintos productos. Esta información incluye campos como el nombre de la marca, el rango de precios, número de valoraciones o imágenes del producto. Este objetivo se realiza con técnicas de \english{web scraping}.
+	\item Como complemento al anterior objetivo, otro objetivo es la implementación de un clasificador automático de imágenes. Este clasificador etiquetará cada imagen en función de si aparece un modelo o no, y si la cara del modelo es visible o no. Esto se consigue con técnicas de inteligencia artificial y redes neuronales, y más concretamente con el uso de \english{deep learning}.
+	\item Otro de los principales objetivos del proyecto es el almacenamiento de la información descargada y de las imágenes clasificadas. Para cumplir con este objetivo se hará uso de un gestor de bases de datos y se almacenará la información en múltiples tablas con sus respectivos campos.
+	\item Por último, un objetivo impuesto para la realización de este proyecto ha sido la visualización de la información descargada y procesada en un documento Excel.
+\end{itemize}
+
+\section{Objetivos de carácter técnico}
+
+A continuación se listan los objetivos técnicos utilizados para la correcta implementación de los objetivos de carácter mas generales expuestos anteriormente.
+
+\begin{itemize}
+	\item Utilizar Python como lenguaje de programación para la totalidad del proyecto.
+	\item Hacer uso de la herramienta Scrapy para implementar todo lo relacionado con la extracción de datos y \english{Web scraping}.
+	\item Un objetivo técnico importante y necesario para la creación del clasificador automático es la creación de un \english{dataset} o conjunto de datos personalizado de forma manual para posteriormente entrenar el clasificador. Para ello se ha usado la herramienta Dataturks\footnote{\url{https://dataturks.com/}}.
+	\item Usar JSON como forma de almacenamiento temporal de los productos descargados debido la simplicidad de su estructura.
+	\item Utilizar SQLite\footnote{\url{https://www.sqlite.org}} como gestor de base de datos para el almacenamiento final de los productos descargados.
+	\item Implementar el clasificador de imágenes con la ayuda de la librería Keras\footnote{\url{https://keras.io/}} y de Google Colab\footnote{\url{https://colab.research.google.com/}}.
+	\item Utilizar el servicio de GitHub\footnote{\url{https://github.com/}} para hacer uso de un control de versiones del proyecto.
+	\item Seguir una metodología ágil para la el desarrollo y el enfoque del proyecto. Para esto se ha usado la herramienta ZenHub\footnote{\url{https://www.zenhub.com/}} como una extensión de GitHub.
+\end{itemize}

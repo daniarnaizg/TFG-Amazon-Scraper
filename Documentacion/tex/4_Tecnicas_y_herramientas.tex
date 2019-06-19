@@ -1,0 +1,103 @@
+\capitulo{4}{Técnicas y herramientas}
+
+Se han utilizado diferentes herramientas para la realización de este proyecto, a continuación se listan con una pequeña descripción de cada una:
+
+
+\section{Lenguajes y bibliotecas de programación}
+
+
+\subsection{Python}
+Python\footnote{\url{https://www.python.org/}} es un lenguaje de programación nacido en los años 90 y ampliamente utilizado en el presente. Se trata de un lenguaje interpretado, dinámicamente tipado y multiplataforma. Soporta programación orientada a objetos y sigue una filosofía de legibilidad y transparencia \cite{wiki:python}.
+
+Ha sido el lenguaje utilizado en la mayor parte de este proyecto, desde la parte de \english{web scraping} a la clasificación de imágenes.
+
+
+\subsection{Scrapy}
+Scrapy\footnote{\url{https://scrapy.org/}} es una herramienta gratuita y de código abierto escrita en Python por Scrapinghub Ltd. y originalmente diseñada para \english{web scraping} aunque también utilizado para extraer datos mediante APIs \cite{wiki:scrapy}.
+
+Scrapy está compuesto por una serie de características que lo hacen la herramienta más adecuada para este proyecto. Entre ellas encontramos:
+
+\begin{itemize}
+	\item Soporte para extraer y seleccionar datos de fuentes HTML/XML usando selectores CSS\footnote{\url{https://es.wikipedia.org/wiki/Hoja_de_estilos_en_cascada}} y expresiones XPath\footnote{\url{https://es.wikipedia.org/wiki/XPath}}.
+	\item Soporte para exportar los datos extraídos en múltiples formatos tales como JSON\footnote{\url{https://es.wikipedia.org/wiki/JSON}}, CSV\footnote{\url{https://es.wikipedia.org/wiki/Valores_separados_por_comas}} y XML\footnote{\url{https://es.wikipedia.org/wiki/Extensible_Markup_Language}}.
+	\item Fuerte extensibilidad, ya que permite conectar funcionalidades externas tales como bases de datos.
+\end{itemize}
+
+
+\subsection{Keras}
+Keras\footnote{\url{https://keras.io/}} se trata de una librería de redes neuronales de código abierto escrita en Python por François Chollet y capaz de ser ejecutada sobre TensorFlow. Las principales características que lo componen son su modularidad, extensibilidad y el ser amigable con el usuario. Además del soporte para las redes neuronales estándar, Keras ofrece soporte para las Redes Neuronales Convolucionales y Redes Neuronales Recurrentes \cite{wiki:keras}.
+
+
+\subsection{OpenCV}
+OpenCV\footnote{\url{https://opencv.org/}} es una biblioteca multiplataforma originalmente desarrollada por Intel y orientada a la visión artificial. Nace en 1999 y actualmente es utilizada en infinidad de aplicaciones. Contiene más de 500 funciones abarcando una gran gama de áreas en el proceso de visión, como reconocimiento de objetos (reconocimiento facial), calibración de cámaras y visión robótica \cite{wiki:opencv}.
+
+
+\subsection{SQLite}
+SQLite\footnote{\url{https://www.sqlite.org/index.html}} es un sistema de gestión de bases de datos relacional multiplataforma que forma parte de una biblioteca escrita en C por Richard Hipp. Su principal característica es que la base de datos se almacena en un único archivo.
+
+
+\section{Herramientas de desarrollo}
+
+
+\subsection{Visual Studio Code}
+Visual Studio Code es un editor de código desarrollado por Microsoft anunciado en 2015 y lanzado al público en 2016. Cuenta con soporte para multitud de lenguajes de programación y entre sus características mas destacadas encontramos soporte para depuración, control integrado de Git\footnote{\url{https://git-scm.com/}}, resaltado de sintaxis, refactorización de código y  finalización inteligente de código \cite{wiki:vscode}.
+
+Este editor ha sido utilizado para escribir la mayoría de código que encontramos en el proyecto.
+
+
+\subsection{Google Colab (Colaboratory)}
+Google Colab\footnote{\url{https://colab.research.google.com}} es un entorno de Jupyter Notebook\footnote{\url{https://jupyter.org/}} ya configurado y completamente ejecutado en remoto. Permite editar y ejecutar código, guardar y compartir proyectos y tener acceso a potentes recursos desde un navegador web.
+
+Esta herramienta ha sido usada a la hora de desarrollar y más tarde entrenar el clasificador de imágenes utilizado en el proyecto.
+
+
+\section{Herramientas de gestión de código}
+
+
+\subsection{Git}
+
+
+\subsection{GitHub}
+GitHub\footnote{\url{https://github.com/}} es una plataforma de desarrollo colaborativo utilizado para alojar proyectos y utilizar el sistema de control de versiones Git \cite{wiki:github}.
+
+
+\subsection{ZenHub}
+
+
+\section{Herramientas de documentación}
+
+
+\subsection{LaTeX}
+\LaTeX{}\footnote{\url{https://es.wikipedia.org/wiki/LaTeX}} es un sistema de composición de textos orientado a la creación de documentos con una alta calidad tipográfica como podrían ser artículos científicos u otros textos con, por ejemplo, expresiones matemáticas.
+
+Se trata de un software libre basado en un conjunto de macros de \TeX, que a su vez se trata de un lenguaje escrito por Leslie Lamport en 1984 \cite{wiki:latex}.
+
+
+\subsection{Overleaf}
+
+\section{Otras técnicas y herramientas}
+
+
+\subsection{JSON}
+JSON (JavaScript Object Notation) es un formato de texto utilizado para el intercambio de datos que desde el año 2019 es considerado como un formato independiente de lenguaje. La principal característica de este lenguaje y la razón por la que se ha utilizado en este proyecto es la facilidad de extraer los datos que lo conforman  con ayuda de \english{parsers} o analizadores sintácticos.
+
+\subsection{Dataturks}
+Dataturks\footnote{\url{https://dataturks.com/}} es una herramienta web cuya finalidad es anotar imágenes de forma manual con el propósito de crear conjuntos de entrenamiento para modelos de redes neuronales como Keras o TensorFlow\footnote{\url{https://www.tensorflow.org/}}.
+
+En este proyecto, esta herramienta ha sido indispensable para crear el modelo que clasifica automáticamente las imágenes de cada producto.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
