@@ -14,20 +14,20 @@ class AmazonPipeline(object):
         self.createTables()
 
     def setupDBConn(self):
-        self.conn = sqlite3.connect('../../databases/1K-Male-Female-DB.db')
+        self.conn = sqlite3.connect('../../databases/prueba-prices.db')
         self.curr = self.conn.cursor()
 
     def createTables(self):
-        # self.dropAmazonTables() # De momento la comento porque cuando hago la parte de los comentarios borra las otras tablas
+        # self.dropAmazonTables()
         self.createAmazonTable()
         self.createImagesTable()
         self.createCommentsTable()
 
     def dropAmazonTables(self):
         # drop tables if it exists
-        self.curr.execute("DROP TABLE IF EXISTS MAIN_AMAZON")
-        self.curr.execute("DROP TABLE IF EXISTS IMAGE_URLS")
-        self.curr.execute("DROP TABLE IF EXISTS COMMENTS")
+        # self.curr.execute("DROP TABLE IF EXISTS PRODUCTOS")
+        # self.curr.execute("DROP TABLE IF EXISTS IMAGENES")
+        self.curr.execute("DROP TABLE IF EXISTS COMENTARIOS")
 
     def closeDB(self):
         self.conn.close()
@@ -36,31 +36,33 @@ class AmazonPipeline(object):
         self.closeDB()
 
     def createAmazonTable(self):
-        self.curr.execute("""CREATE TABLE IF NOT EXISTS MAIN_AMAZON(
+        self.curr.execute("""CREATE TABLE IF NOT EXISTS PRODUCTOS(
                         asin TEXT PRIMARY KEY NOT NULL,
                         sex TEXT,
                         rating TEXT,
                         description TEXT,
                         reviews INTEGER,
                         brand TEXT,
-                        price_range TEXT
+                        min_price TEXT,
+                        max_price TEXT
                         )""")
 
 
     def createImagesTable(self):
-        self.curr.execute("""CREATE TABLE IF NOT EXISTS IMAGE_URLS(
+        self.curr.execute("""CREATE TABLE IF NOT EXISTS IMAGENES(
                         asin TEXT FOREING KEY NOT NULL,
                         url TEXT
                         )""")
 
 
     def createCommentsTable(self):
-        self.curr.execute("""CREATE TABLE IF NOT EXISTS COMMENTS(
+        self.curr.execute("""CREATE TABLE IF NOT EXISTS COMENTARIOS(
                         asin TEXT FOREING KEY NOT NULL,
                         comment TEXT
                         )""")
 
-    def process_item(self, item, spider):
+    def process_item(self, item):
+        # Para saber si se trata de un producto
         if 'description' in item:
             self.storeProductInDb(item)
             self.storeImagesInDb(item)
@@ -68,6 +70,7 @@ class AmazonPipeline(object):
             print ('Product stored in Database')
             print ('--------------------------')
 
+        # Para saber si se trata de un comentario
         if 'comments' in item:
             self.storeCommentsInDb(item)
             print ('--------------------------')
@@ -80,20 +83,21 @@ class AmazonPipeline(object):
         return item
 
     def storeProductInDb(self, item):
-        self.curr.execute("""INSERT INTO MAIN_AMAZON VALUES( ?, ?, ?, ?, ?, ?, ?)""",(
+        self.curr.execute("""INSERT INTO PRODUCTOS VALUES( ?, ?, ?, ?, ?, ?, ?, ?)""",(
             item['asin'],
             item['sex'],
             item['rating'],
             item['description'],
             item['reviews'],
             item['brand'],
-            item['pricerange']
+            item['min_price'],
+            item['max_price']
         ))
         self.conn.commit()
 
     def storeImagesInDb(self, item):
         for i in range(len(item['image_urls'])):
-            self.curr.execute("""INSERT INTO IMAGE_URLS VALUES( ?, ?)""",(
+            self.curr.execute("""INSERT INTO IMAGENES VALUES( ?, ?)""",(
                 item['asin'],
                 item['image_urls'][i]
             ))
@@ -101,7 +105,7 @@ class AmazonPipeline(object):
 
     def storeCommentsInDb(self, item):
         for i in range(len(item['comments'])):
-            self.curr.execute("""INSERT INTO COMMENTS VALUES( ?, ?)""",(
+            self.curr.execute("""INSERT INTO COMENTARIOS VALUES( ?, ?)""",(
                 item['asin'],
                 item['comments'][i]
             ))

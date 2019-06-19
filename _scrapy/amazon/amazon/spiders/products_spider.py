@@ -11,12 +11,26 @@ class ProductsSpider(scrapy.Spider):
 	allowed_domains = ['amazon.com']
 	
 	list_urls = []
-	with open('../../outputs/1K-Male-Female-URLS.json') as json_data:
+	with open('../../outputs/prueba-prices-urls.json') as json_data:
 		urls = json.load(json_data)
 		for i in range(len(urls)):
 			list_urls = list_urls + urls[i]['page_urls']
 			
 		start_urls = list_urls
+
+	# Función que extrae el precio mínimo de un rango de precios aplicando expresion regular
+	def get_min_price(self, price_range):
+		min = re.findall(r'\$(.*?)\ ', price_range)
+		if len(min) is 0:
+			return re.findall(r'(?<=\$).+$', price_range)
+		return min
+
+	# Función que extrae el precio máximo de un rango de precios aplicando expresion regular
+	def get_max_price(self, price_range):
+		max = re.findall(r'(?<= \$).+$', price_range)
+		if len(max) is 0:
+			return re.findall(r'(?<=\$).+$', price_range)
+		return max
 	
 	def parse(self, response):
 
@@ -30,9 +44,13 @@ class ProductsSpider(scrapy.Spider):
 
 		# Price range
 		try:
-			item['pricerange'] = response.xpath('//*[@id="priceblock_ourprice"]/text()').extract()[0]
+			pricerange = response.xpath('//*[@id="priceblock_ourprice"]/text()').extract()[0]
 		except IndexError:
 			item['rating'] = 'N/A'
+
+		item['min_price'] = self.get_min_price(pricerange)[0]
+		item['max_price'] = self.get_max_price(pricerange)[0]
+
 
 		# Rating
 		try:
