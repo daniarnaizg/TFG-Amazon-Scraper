@@ -58,7 +58,7 @@ En cuanto a la arquitectura de Scrapy, hay que destacar los tres principales blo
 
 \begin{description}
     \item[\english{Items}:] Los diferentes elementos o campos a extraer.
-    \item[\english{Spiders}:] Clases escritas por el usuario que contienen los diferentes procedimientos para parsear y extraer los \english{items} de una o varial urls. En este caso hemos hecho uso de 3 \english{spiders}: Una para obtener las url de cada artículo, otra para extraer los comentarios, y la última para el resto de campos.
+    \item[\english{Spiders}:] Clases escritas por el usuario que contienen los diferentes procedimientos para parsear y extraer los \english{items} de una o varias urls. En este caso hemos hecho uso de 3 \english{spiders}: Una para obtener las url de cada artículo, otra para extraer los comentarios, y la última para el resto de campos.
     \item[\english{Pipelines}:] Apartado responsable de procesar los \english{items} una vez han sido extraidos por los \english{spiders}. En este proyecto se ha usado para almacenar los campos extraídos en una base de datos.
 \end{description}
 

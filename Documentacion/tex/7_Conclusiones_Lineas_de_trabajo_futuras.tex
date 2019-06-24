@@ -1,4 +1,22 @@
 \capitulo{7}{Conclusiones y Líneas de trabajo futuras}
 
-Todo proyecto debe incluir las conclusiones que se derivan de su desarrollo. Éstas pueden ser de diferente índole, dependiendo de la tipología del proyecto, pero normalmente van a estar presentes un conjunto de conclusiones relacionadas con los resultados del proyecto y un conjunto de conclusiones técnicas. 
-Además, resulta muy útil realizar un informe crítico indicando cómo se puede mejorar el proyecto, o cómo se puede continuar trabajando en la línea del proyecto realizado. 
+\section{Conclusiones generales}
+En primer lugar y en relación a los principales requisitos y objetivos del proyecto, creo que se han completado de forma satisfactoria ofreciendo un forma de extraer información de los productos deseados en \english{Amazon.com} para más tarde clasificar las imágenes principales de cada artículo y almacenar toda esta información tanto en una base de datos como en un documento excel para su posterior uso en la realización de distintos estudios y cálculos.
+
+En cuanto a las dificultades encontradas en la realización del proyecto, encontramos algunas en la parte de \english{web scraping} como pueden ser el cambio del código html de la página que ha hecho cambiar la forma de extraer los diferentes campos en diversas ocasiones, o el bloqueo temporal que la propia web ponía a mi dirección IP a la hora de extraer grandes cantidades de productos. En la parte del clasificador de imágenes también han surgido algunos inconvenientes, el principal problema encontrado está relacionado con la detección parcial de las caras de los modelos, lo cual ha significado probar diversos métodos y técnicas hasta encontrar la que mejor resultados ofrecía.
+
+De forma más general, otro inconveniente encontrado ha sido la forma de unir las diferentes partes que conforman el proyecto. Aunque casi la totalidad del código es Python, algunas partes se han realizado en \english{notebooks} de Google Colab y otras dentro de la estructura que ofrece Scrapy. Es por esto que se ha decidido plantear el proyecto de forma modular creando una diferenciación entre cada una de las partes que lo conforman: \english{Web scraping}, clasificación de imágenes y Almacenamiento de datos.
+
+A nivel personal, creo que ha sido una experiencia enriquecedora y positiva en varios sentidos, el primero puramente académico ya que he necesitado aprender y estudiar nuevos conceptos y técnicas además de reforzar lo ya tratado en la propia universidad. Y el segundo, ya de cara al futuro, con la puesta en práctica de metodologías y técnicas de investigación y de toma de decisiones.
+
+\section{Líneas de trabajo futuras}
+
+A continuación se listan algunas posibles mejoras o ampliaciones que podrían incorporarse al proyecto en versiones futuras:
+
+\begin{itemize}
+    \item Integración de las distintas partes del proyecto en una interfaz de usuario para hacer mas sencilla la utilización de la herramienta.
+    \item Clasificar y almacenar todas las imágenes asociadas a un artículo en vez de únicamente la principal.
+    \item Hacer una clasificación de los comentarios o de las descripciones de los artículos. En esta versión únicamente se almacenan y se asocian con el producto al que pertenecen.
+    \item Ampliar la clasificación de imágenes indicando mas características. Algunos ejemplos podrían ser la detección de algunas partes del cuerpo, o qué colores aparecen en la imagen.
+    \item Dotar a la herramienta de una forma de visualizar los datos finales de forma interactiva.
+\end{itemize}
