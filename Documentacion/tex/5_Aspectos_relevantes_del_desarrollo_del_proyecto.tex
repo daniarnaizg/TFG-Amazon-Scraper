@@ -25,9 +25,9 @@ Desde un primer momento se ha querido obtener la mayor cantidad de campos de inf
     \item[Sexo:] Sexo al que va dirigido cada artículo.
     \item[Rango de precios:] El precio de cada producto puede variar en función del color o la talla. Este campo recoge el precio máximo y mínimo de cada producto.
     \item[Marca:] El nombre de la marca de cada artículo.
-    \item[Descripción:] Texto descriptivo que el vendedor ha usado para cada producto.
-    \item[Puntuación:] Media de las puntuaciones que los clientes han votado a cada producto. Va del 1 al 5.
-    \item[Número de valoraciones:] Número de clientes que han valorado el producto.
+    \item[Descripción:] Texto que el vendedor ha utilizado para describir y dar detalles de cada producto.
+    \item[Puntuación:] Media de las puntuaciones que los clientes han votado a cada producto. Va del 0 al 5.
+    \item[Número de valoraciones:] Número de clientes que han proporcionado una valoración del producto.
     \item[Comentarios sobre el producto:] Comentarios completos sobre un producto en el que los compradores dejan su opinión. El número de comentarios a extraer debe ser definido al comenzar el proceso.
     \item[URL:] Dirección web de cada producto
     \item[Imágenes:] Conjunto de imágenes asociadas a cada artículo.
@@ -45,9 +45,9 @@ La herramienta utilizada en este proyecto para realizar el \english{web scraping
 Las principales diferencias y ventajas que lo separan del resto son:
 \begin{itemize}
     \item Es más rápido ya que trabaja de forma asíncrona.
-    \item Tiene mejor soporte para parseado de html.
+    \item Tiene mejor soporte para parseado de HTML.
     \item Soporta caracteres unicode.
-    \item Soporta redirecciones http.
+    \item Soporta redirecciones HTTP.
     \item Exportación directa de los resultados a JSON, CSV o XML.
     \item Se puede usar junto a otras librerías como urllib\footnote{\url{https://docs.python.org/3/library/urllib.html}} o BeautifulSoup.
 \end{itemize}
@@ -58,32 +58,32 @@ En cuanto a la arquitectura de Scrapy, hay que destacar los tres principales blo
 
 \begin{description}
     \item[\english{Items}:] Los diferentes elementos o campos a extraer.
-    \item[\english{Spiders}:] Clases escritas por el usuario que contienen los diferentes procedimientos para parsear y extraer los \english{items} de una o varias urls. En este caso hemos hecho uso de 3 \english{spiders}: Una para obtener las url de cada artículo, otra para extraer los comentarios, y la última para el resto de campos.
-    \item[\english{Pipelines}:] Apartado responsable de procesar los \english{items} una vez han sido extraidos por los \english{spiders}. En este proyecto se ha usado para almacenar los campos extraídos en una base de datos.
+    \item[\english{Spiders}:] Clases escritas por el usuario que contienen los diferentes procedimientos para parsear y extraer los \english{items} de uno o varios enlaces. En este caso hemos hecho uso de 3 \english{spiders}: Una para obtener los enlaces a cada artículo, otra para extraer los comentarios, y la última para el resto de campos.
+    \item[\english{Pipelines}:] Apartado responsable de procesar los \english{items} una vez han sido extraidos por las \english{spiders}. En este proyecto se han usado para almacenar los campos extraídos en una base de datos.
 \end{description}
 
 \imagen{scrapy_architecture}{Arquitectura que sigue Scrapy y sus diferentes componentes}
 
 \subsection{\english{Spiders} utilizados}
-El primer \english{spider} se encarga de extraer la url de los productos. Para ello partimos de la página principal donde se encuentran todos los artículos a extraer. Cabe destacar que no existe una url que contenga los productos orientados a ambos sexos, por lo que en caso de querer artículos para hombres y mujeres se necesita una url para cada sexo.
+El primer \english{spider} se encarga de extraer los enlaces a los productos. Para ello partimos de la página principal donde se encuentran todos los artículos a extraer. Cabe destacar que no existe un enlace que de acceso a una página web que contenga los productos orientados a ambos sexos, por lo que en caso de querer artículos para hombres y mujeres se necesita una url para cada sexo.
 
-Este \english{spider} además genera un archivo JSON que contiene todas las urls que ha extraido. Este archivo será utilizado como punto de partida de los siguientes \english{spiders} para la extracción de los campos de cada artículo.
+Este \english{spider} además genera un archivo JSON que contiene todos los enlaces que ha extraido. Este archivo será utilizado como punto de partida de los siguientes \english{spiders} para la extracción de los campos de cada artículo.
 
 \imagen{principal-hombres2}{Productos a extraer}
 
 El siguiente \english{spider} es el encargado de extraer la mayoría de campos de un producto. Es necesario destacar los diferentes métodos utilizados para la extracción de estos campos:
 
 \begin{itemize}
-    \item Expresiones regulares: El campo del ASIN se extrae directamente  de la url con ayuda de una expresión regular.
-    \item La mayoría de campos se han extraido con la ayuda de expresiones XPath\footnote{\url{https://es.wikipedia.org/wiki/XPath}}, que consisten en parsear el código html de la web e identificar el campo que se desea extraer.
+    \item Expresiones regulares: El campo del ASIN se extrae directamente del url con ayuda de una expresión regular.
+    \item La mayoría de campos se han extraido con la ayuda de expresiones XPath\footnote{\url{https://es.wikipedia.org/wiki/XPath}}, que consisten en parsear el código HTML de la web e identificar el campo que se desea extraer.
     \item Para las imágenes ha sido necesaria la utilización de una librería externa llamada js2xml\footnote{\url{https://github.com/scrapinghub/js2xml}}. Esta librería facilita la extracción de elementos embebidos en código JavaScript usando XPath.
 \end{itemize}
 
 \imagen{campos_1}{Posición de algunos de los campos a extraer}
 
-Por último, el tercer \english{spider} del que hacemos uso es el encargado de extraer los comentarios de cada producto. Para ello usamos una expresión XPath sobre una página cuya url creamos a partir del ASIN de cada artículo.
+Por último, el tercer \english{spider} del que hacemos uso es el encargado de extraer los comentarios de cada producto. Para ello usamos una expresión XPath sobre una página cuyo url creamos a partir del ASIN de cada artículo.
 
-\imagen{comentarios}{Comentarios sobre un producto}
+\imagen{comentarios2}{Comentarios sobre un producto}
 
 En cuanto al \english{pipeline} de nuestro proyecto de Scrapy, cada vez que se extrae un \english{item}, éste es almacenado en una base de datos. El \english{pipeline} se encarga de conectar con la base de datos, crear las tablas necesarias con sus respectivos campos, y cerrar la conexión una vez se han almacenado todos los productos.
 
@@ -95,9 +95,14 @@ Antes de etiquetar automáticamente las imágenes, es necesario entrenar el clas
 
 Ese conjunto de datos etiquetados o \english{dataset}, se ha generado con la ayuda de la web \english{Dataturks}\footnote{\url{https://dataturks.com}}.
 
-El funcionamiento de esta herramienta es sencillo: Basta con crear una lista con las urls de las imágenes que se desean etiquetar e indicar las posibles etiquetas que una imagen puede tener. A partir de aquí, la herramienta descarga y muestra secuencialmente todas las imágenes y se ha de decidir que etiqueta corresponde a cada una.
+El funcionamiento de esta herramienta es sencillo: basta con crear una lista con los enlaces a las imágenes que se desean etiquetar e indicar las posibles etiquetas que una imagen puede tener. A partir de aquí, la herramienta descarga y muestra secuencialmente todas las imágenes y se ha de decidir que etiqueta corresponde a cada una.
 
-Una vez se han etiquetado todas las imágenes, se puede exportar el conjunto de imágenes como un archivo JSON que asocia cada url con las etiquetas seleccionadas.
+-----------
+-----------
+-----------
+-----------> PONER CAPTURA DE DATATURKS
+
+Una vez se han etiquetado todas las imágenes, se puede exportar el conjunto de imágenes como un archivo JSON que asocia cada enlace con las etiquetas seleccionadas.
 
 Para este proyecto se han creado dos \english{datasets}. En el primero se diferencian las imágenes en las que aparece un modelo y en las que no, el segundo \english{dataset} parte del anterior e identifica en cuales de las imágenes en las que si hay modelo, a éste se le ve la cara.
 
@@ -109,19 +114,19 @@ Otro problema encontrado ha sido a la hora de identificar si al modelo se le ve 
 
 Algunos de los recursos que se han utilizado para una posible detección parcial de la cara han sido los siquientes:
 \begin{itemize}
-    \item Partial Face Recognition: \url{http://www.faceforensics.com/PartialFaceRecog.aspx}
-    \item Partial Face Detection in the Mobile Domain: \url{https://arxiv.org/pdf/1704.02117.pdf}
-    \item Dynamic Feature Learning for Partial Face Recognition: \url{http://openaccess.thecvf.com/content_cvpr_2018/papers/He_Dynamic_Feature_Learning_CVPR_2018_paper.pdf}
-    \item A robust face detector under partial occlusion - IEEE Conference Publication: \url{https://ieeexplore.ieee.org/document/1418825}
-    \item Dealing with Inaccurate Face Detection for Automatic Gender Recognition with Partially Occluded Faces: \url{http://repositori.uji.es/xmlui/bitstream/handle/10234/23941/34130.pdf?sequence=1&isAllowed=y}
+    \item \english{Partial Face Recognition}: \url{http://www.faceforensics.com/PartialFaceRecog.aspx}
+    \item \english{Partial Face Detection in the Mobile Domain}: \url{https://arxiv.org/pdf/1704.02117.pdf}
+    \item \english{Dynamic Feature Learning for Partial Face Recognition}: \url{http://openaccess.thecvf.com/content_cvpr_2018/papers/He_Dynamic_Feature_Learning_CVPR_2018_paper.pdf}
+    \item \english{A robust face detector under partial occlusion - IEEE Conference Publication}: \url{https://ieeexplore.ieee.org/document/1418825}
+    \item \english{Dealing with Inaccurate Face Detection for Automatic Gender Recognition with Partially Occluded Faces}: \url{http://repositori.uji.es/xmlui/bitstream/handle/10234/23941/34130.pdf}
 \end{itemize}
 
-\imagen{cara_parcial}{Modelo con la cara parcialmente visible}
-\imagen{cara_espalda}{Modelo de espaldas con la cara visible}
+%\imagen{cara_parcial}{Modelo con la cara parcialmente visible}
+\imagen{cara_espalda_parcial}{Ejemplos de modelos con la cara parcialmente visible}
 
 \section{Etiquetado automático de las imágenes}
 
-Para el etiquetado automático de imágenes se ha decidido usar Keras. Existen otros \english{frameworks} que se han tenido en cuenta para esto proyecto como pueden ser Pytorch\footnote{\url{https://pytorch.org/}} o Caffe\footnote{\url{https://caffe.berkeleyvision.org/}}, pero se ha usado Keras por varias razones:
+Para el etiquetado automático de imágenes se ha decidido usar Keras. Existen otros \english{frameworks} que se han tenido en cuenta para este proyecto como pueden ser Pytorch\footnote{\url{https://pytorch.org/}} o Caffe\footnote{\url{https://caffe.berkeleyvision.org/}}, pero se ha usado Keras por varias razones:
 
 \begin{description}
     \item[Experiencia con este \english{framework}:] Ya había trabajado con anterioridad con Keras para clasificación de imágenes.
@@ -133,15 +138,15 @@ Para el etiquetado automático de imágenes se ha decidido usar Keras. Existen o
 \subsection{Validación cruzada}
 Para el entrenamiento de estos clasificadores se ha usado la técnica de validación cruzada. Esta técnica consiste en dividir el \english{dataset} en dos conjuntos complementarios y realizar el análisis sobre un subconjunto para luego validarlo con los datos del otro subconjunto. La principal ventaja de este método es que es muy rápido de computar.
 
-Existen variaciones de este método, en el que se suceden varias iteraciones, obteniendo así una mayor precisión. En este caso se ha optado por el método de validación cruzada aleatoria ya que la precisión era aceptable y Keras dispone de una función que facilita este procedimiento. \cite{wiki:cruzada}
+Existen variaciones de este método, en el que se suceden varias iteraciones, obteniendo así una mayor precisión. En este caso se ha optado por el método de validación cruzada aleatoria ya que la precisión era aceptable y Keras dispone de una función que facilita este procedimiento \cite{wiki:cruzada}. 
 
 \imagen{Random_cross_validation}{Validación cruzada aleatoria con $k$ iteraciones}
 %\imagen{test_train}{Diagrama de conjuntos de entrenamiento y validación}
 
-Para los clasificadores entrenados en este proyecto, se ha hecho una división del 75\% para el conjunto de entrenamiento y un 25\% para el conjunto de test. En el caso del clasificador que identifica si aparece un modelo o no, se obtiene una precisión de aproximadamente un 93\%. En cambio, para el clasificador que indica si parece la cara del modelo, la precisión es de únicamente un 80\%.
+Para los clasificadores entrenados en este proyecto, se ha hecho una división del 75\% para el conjunto de entrenamiento y un 25\% para el conjunto de test. En el caso del clasificador que identifica si aparece un modelo o no, se obtiene una precisión de aproximadamente un 93\%. En cambio, para el clasificador que indica si parece la cara del modelo, la precisión es de únicamente un 80\%. La diferencia de precisión entre ambos clasificadores se debe a la complejidad del problema, ya que incluso se han tenido dudas a la hora elegir qué etiquetas usar de forma manual.
 
-\imagen{precision_modelo}{Precisión del clasificador Modelo/No modelo}
-\imagen{precision_cara}{Precisión del clasificador Cara/No cara}
+\imagen{precision_modelo_inv2}{Precisión del clasificador Modelo/No modelo}
+\imagen{precision_cara_inv2}{Precisión del clasificador Cara/No cara}
 
 El número de iteraciones para el entrenamiento ha sido de 10 para ambos clasificadores. Se ha probado con distintos números de iteraciones pero la precisión obtenida no variaba o decrecía.
 
@@ -157,24 +162,24 @@ En este punto, ya tendríamos los clasificadores funcionando y los campos de los
 
 \begin{enumerate}
     \item Cargar los clasificadores previamente entrenados
-    \item Importar todos los productos que se desea clasificar. Esto se hace a partir del archivo JSON que he generado Dataturks combinado con el archivo JSON creado por Scrapy.
+    \item Importar todos los productos que se desea clasificar. Esto se hace a partir del archivo JSON que ha generado Dataturks combinado con el archivo JSON creado por Scrapy.
     \item Clasificamos la imagen  principal de cada producto.
     \item Conectamos con la base de datos y creamos una nueva tabla que incluirá las predicciones de cada imagen. Es necesario recordar que la base de datos hasta este momento contiene 3 tablas: Productos, Imágenes y Comentarios. Esta nueva tabla asocia cada predicción con el ASIN del artículo al que pertenece.
 \end{enumerate}
 
-Con esto la base de datos quedaría completada. Cabe destacar que se ha elegido crear una nueva tabla en vez de añadir el campo \english{predicción} a una tabla ya existente ya que en un futuro se tendría pensado clasificar mas aspectos de cada artículo como podrían ser los comentarios u otras características de las imágenes.
+Con esto la base de datos quedaría completada. Cabe destacar que se ha elegido crear una nueva tabla en vez de añadir el campo <<predicción>> a una tabla ya existente ya que en un futuro se tendría pensado clasificar mas aspectos de cada artículo como podrían ser los comentarios u otras características de las imágenes.
 
 \subsection{Almacenamiento de los datos}
 
-La base de datos utilizada para almacenar los diferentes productos es muy simple. Una vez finalizada la extracción y el procesamiento de los datos, cuenta con 4 tablas con el ASIN de cada artículo como identificador.
+La base de datos utilizada para almacenar los diferentes productos no es muy compleja. Una vez finalizada la extracción y el procesamiento de los datos, cuenta con 4 tablas con el ASIN de cada artículo como identificador.
 
 \begin{itemize}
-    \item La primera tabla, la más general, tiene los diferentes campos de cada producto y el ASIN como clave primaria. Cada entrada pertenece a un artículo diferente.
-    \item La tabla de las imágenes almacena las urls de cada imagen junto al ASIN del producto al que pertenece. Puede haber varias imágenes para un único producto.
+    \item La primera tabla, la más general, contiene los diferentes campos de cada producto y el ASIN como clave primaria. Cada entrada pertenece a un artículo diferente.
+    \item La tabla de las imágenes almacena los enlaces a cada imagen junto al ASIN del producto al que pertenece. Puede haber varias imágenes para un único producto.
     \item La tabla de los comentarios almacena comentarios asociados a cada artículo. Puede haber varios comentarios de cada producto.
     \item La tabla de predicciones asocia cada artículo con la predicción que el clasificador ha generado para la imagen principal de dicho producto. Cada entrada es de un producto diferente.
 \end{itemize}
 
-\imagen{bd_diagram}{Diagrama de la base de datos utilizada.}
+Por último, es necesario añadir el proceso de creación de un documento Excel a partir de la base de datos ya completada. Para esto se ha utilizado una librería de Python llamada Pandas\footnote{\url{https://pandas.pydata.org/pandas-docs/stable/index.html}}, la cual extrae la información de la base de datos y la exporta a un documento Excel creando una página por cada tabla existente en la base de datos.
 
-\section{Ciclo de vida del proceso completo}
+\imagen{bd_diagram}{Diagrama de la base de datos utilizada.}
