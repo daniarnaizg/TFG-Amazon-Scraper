@@ -61,7 +61,7 @@ class AmazonPipeline(object):
                         comment TEXT
                         )""")
 
-    def process_item(self, item):
+    def process_item(self, item, spider):
         # Para saber si se trata de un producto
         if 'description' in item:
             self.storeProductInDb(item)
