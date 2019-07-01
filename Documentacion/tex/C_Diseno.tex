@@ -2,10 +2,146 @@
 
 \section{Introducción}
 
+Este apartado se encarga de recoger los diferentes diseños que han sido llevados a cabo para la realización del proyecto y cumplir de forma satisfactoria los requisitos y objetivos anteriormente tratados. 
+
 \section{Diseño de datos}
 
+Esta sección detalla cómo se han almacenado los datos, tanto en la base de datos SQLite, como en los archivos JSON que genera Scrapy.
+
+\subsection{Estructura JSON}
+Cada vez que \english{scrapeamos} un producto, éste será añadido a un archivo JSON que genera Scrapy. En total, se generan 3 archivos JSON por cada uso de la herramienta:
+
+\begin{itemize}
+    \item \textbf{Enlaces a cada producto:} El primer JSON recoge todos los enlaces que apuntan a los productos de los cuales se desea extraer la información. La estructura es muy sencilla ya que únicamente guarda un enlace por cada producto:
+    
+    \imagen{anexos/json_url}{Estructura del JSON con los enlaces a los productos}
+    
+    Como se puede ver, cada página de <<Amazon.com>> contiene 48 productos. En este JSON se almacenan los enlaces a estos 48 artículos.
+    
+    \item \textbf{Campos principales de los productos:} Este JSON almacena los campos que se extraen de cada producto de la siguiente forma:
+    
+    \imagen{anexos/json_product}{Estructura del JSON con los campos de cada producto}
+    
+    Como se puede apreciar, la estructura se compone de los siguientes campos:
+    
+    \begin{description}
+        \item[ASIN:] Código identificativo de cada producto.
+        \item[Sexo:] Sexo al que va dirigido cada artículo.
+        \item[Rango de precios:] El precio de cada producto puede variar en función del color o la talla. Este campo recoge el precio máximo y mínimo de cada producto.
+        \item[Puntuación:] Media de las puntuaciones que los clientes han votado a cada producto. Va del 0 al 5.
+        \item[Número de valoraciones:] Número de clientes que han proporcionado una valoración del producto.
+        \item[Marca:] El nombre de la marca de cada artículo.
+        \item[Descripción:] Texto que el vendedor ha utilizado para describir y dar detalles de cada producto.
+        \item[Enlaces a las imágenes:] Enlaces de las imágenes asociadas a cada artículo.
+    \end{description}
+    
+    \item \textbf{Comentarios de los productos:} Por último, este JSON se encarga de recoger los diferentes comentarios que los clientes han dejado a cada artículo. Se compone de dos únicos campos: una lista con los comentarios y el identificador del producto:
+    
+    \imagen{anexos/json_comment}{Estructura del JSON con los comentarios de cada producto}
+\end{itemize}
+
+\subsection{Estructura de la base de datos SQLite}
+
+Este proyecto también hace uso de una base de datos para almacenar toda la información una vez han sido procesadas y clasificadas las imágenes.
+Para ello se hace uso de una base de datos cuyas tablas y campos son los siguientes:
+
+\imagen{bd_diagram}{Diagrama de la base de datos utilizada.}
+
+\begin{description}
+    \item[Tabla productos] Recoge los principales campos de cada producto. Cada entrada pertenece a un artículo diferente.
+    \item[Tabla Imágenes] Almacena los enlaces a las imágenes de cada producto. Puede haber varias imágenes para un único producto.
+    \item[Tabla Comentarios] Almacena los comentarios asociados a cada artículo. Puede haber varios comentarios de cada producto.
+    \item[Tabla Predicciones] Almacena las predicciones que los clasificadores han generado para la imagen principal de cada artículo. Cada entrada es de un producto diferente.
+\end{description}
+
 \section{Diseño procedimental}
+En esta sección se muestran los diferentes procedimientos para la realización de los procesos mas importantes del proyecto:
+
+
+\subsection{\english{Web scraping}}
+
+A la hora de la extracción de información de los productos, el proceso a seguir es el siguiente:
+
+\begin{enumerate}
+    \item Extraer los enlaces a dichos productos. Para ello se hace uso del \english{spider} llamado <<urls\_spider>> en Scrapy.
+    \item Con el archivo JSON que se ha generado en el anterior paso, se pasará a la extracción de información de cada producto por medio del \english{spider} llamado <<products\_spider>>.
+    \item Por último, si se desean extraer los comentarios de los productos, se hará uso del \english{spider} llamado <<comments\_spider>> para ello.
+\end{enumerate}
+
+\imagen{proyecto_scrapy}{Proceso de \english{web scraping} del proyecto}
+
+\subsection{Entrenamiento de los clasificadores}
+
+Para entrenar los clasificadores es necesario haber creado un conjunto de entrenamiento y haber etiquetado de forma manual las imágenes que conforman dicho conjunto.
+Una vez se dispone de ese conjunto de entrenamiento los pasos para entrenar el clasificador son los siguientes:
+
+\begin{enumerate}
+    \item Descargar el \english{dataset} que contiene las imágenes previamente etiquetadas.
+    \item De forma secuencial, se convertirá cada imagen a formato \english{array} y se almacenará junto a su etiqueta.
+    \item Crear conjuntos de test y entrenamiento para aplicar la técnica de validación cruzada.
+    \item Inicializar el modelo del clasificador.
+    \item Entrenar el clasificador.
+    \item Almacenar el clasificador ya entrenado para su posterior uso.
+\end{enumerate}
+
+\subsection{Clasificación de imágenes y almacenamiento de resultados}
+
+El proceso de clasificación de imágenes y su posterior almacenamiento es el siguiente:
+
+\begin{enumerate}
+    \item Importar y cargar los clasificadores previamente entrenados.
+    \item Importar el archivo JSON que contiene los productos a clasificar.
+    \item Descargar cada imagen con el ASIN del producto como nombre.
+    \item Clasificar cada imagen siguiendo el siguiente algoritmo:
+    
+        \FloatBarrier
+        \begin{algorithm}[!h]
+            \If{Imagen cargada correctamente}
+            	{
+            	Redimensionar imagen.
+            	
+            	Convertir imagen a formato \english{array}.
+            	
+            	Aplicar clasificador que detecta modelo.
+            	
+            	\If{El clasificador ha encontrado un modelo en la imagen}
+            		{
+            			Aplicar clasificador que detecta cara.
+            			
+            			\If{El clasificador ha encontrado la cara del modelo}
+            		    {
+            			Devolver predicción: Modelo con cara.
+            		    }
+            		    Devolver predicción: Modelo sin cara.
+            		}
+            	    Devolver predicción: Sin modelo.
+            	}
+            \caption{Algoritmo de clasificación de imágenes}
+            \label{Alg:}
+        \end{algorithm}
+        \FloatBarrier
+        
+    \item Importar la base de datos
+    \item Crear la tabla <<Predicciones>> en la base de datos
+    \item Almacenar en la base de datos cada predicción generada por el clasificador quedando asociada al artículo al que pertenece la imagen.
+            
+\end{enumerate}
 
 \section{Diseño arquitectónico}
+ En cuanto al diseño arquitectónico del proyecto, es necesario señalar que la primera parte del proyecto, todo lo relacionado con la extracción de datos y \english{web scraping}, funciona bajo la estructura se Scrapy. El resto se encuentra dividido en dos \english{notebooks} de Google Colab, el primero para el entrenamiento de los clasificadores, y el segundo destinado a la clasificación de imágenes y su posterior almacenamiento en la base de datos.
+ 
+El siguiente diagrama muestra una visión general de la arquitectura de Scrapy junto con los conponentes que lo conforman y el flujo de datos que se lleva a cabo en el sistema \cite{scrapy:arch}:
+ 
+ \imagen{scrapy_architecture}{Arquitectura que sigue Scrapy y sus diferentes componentes}
+ 
+ \subsection{Componentes de scrapy}
+ 
+ A continuación se describen los principales componentes de la arquitectura de un proyecto de Scrapy:
+ 
+\begin{itemize}
+    \item \textbf{\english{Items}:} Los diferentes elementos o campos a extraer.
+    \item \textbf{\english{Spiders}:} Clases escritas por el usuario que contienen los diferentes procedimientos para parsear y extraer los \english{items} de uno o varios enlaces. En este caso hemos hecho uso de 3 \english{spiders}: Una para obtener los enlaces a cada artículo, otra para extraer los comentarios, y la última para el resto de campos.
+    \item \textbf{\english{Pipelines}:} Apartado responsable de procesar los \english{items} una vez han sido extraidos por las \english{spiders}. En este proyecto se han usado para almacenar los campos extraídos en una base de datos.
+\end{itemize}
 
-
+%\imagen{anexos/arq}{Estructura del proyecto de scrapy}

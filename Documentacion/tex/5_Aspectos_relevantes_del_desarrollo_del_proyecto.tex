@@ -1,6 +1,6 @@
 \capitulo{5}{Aspectos relevantes del desarrollo del proyecto}
 
-Este apartado se recogen los aspectos más interesantes del desarrollo del proyecto, el ciclo de vida utilizado y los detalles de mayor relevancia de las fases de análisis, diseño e implementación.
+Este apartado recoge los aspectos más interesantes del desarrollo del proyecto, el ciclo de vida utilizado y los detalles de mayor relevancia de las fases de análisis, diseño e implementación.
 
 \section{Metodologías aplicadas}
 
@@ -87,7 +87,7 @@ Por último, el tercer \english{spider} del que hacemos uso es el encargado de e
 
 En cuanto al \english{pipeline} de nuestro proyecto de Scrapy, cada vez que se extrae un \english{item}, éste es almacenado en una base de datos. El \english{pipeline} se encarga de conectar con la base de datos, crear las tablas necesarias con sus respectivos campos, y cerrar la conexión una vez se han almacenado todos los productos.
 
-\imagen{proyecto_scrapy}{Proceso de \english{web scraping} del proyecto.}
+\imagen{proyecto_scrapy}{Proceso de \english{web scraping} del proyecto}
 
 \section{Etiquetado manual de las imágenes}
 
@@ -97,10 +97,7 @@ Ese conjunto de datos etiquetados o \english{dataset}, se ha generado con la ayu
 
 El funcionamiento de esta herramienta es sencillo: basta con crear una lista con los enlaces a las imágenes que se desean etiquetar e indicar las posibles etiquetas que una imagen puede tener. A partir de aquí, la herramienta descarga y muestra secuencialmente todas las imágenes y se ha de decidir que etiqueta corresponde a cada una.
 
------------
------------
------------
------------> PONER CAPTURA DE DATATURKS
+\imagen{dataturks}{Captura de pantalla durante el proceso de etiquetado manual}
 
 Una vez se han etiquetado todas las imágenes, se puede exportar el conjunto de imágenes como un archivo JSON que asocia cada enlace con las etiquetas seleccionadas.
 
@@ -145,10 +142,11 @@ Existen variaciones de este método, en el que se suceden varias iteraciones, ob
 
 Para los clasificadores entrenados en este proyecto, se ha hecho una división del 75\% para el conjunto de entrenamiento y un 25\% para el conjunto de test. En el caso del clasificador que identifica si aparece un modelo o no, se obtiene una precisión de aproximadamente un 93\%. En cambio, para el clasificador que indica si parece la cara del modelo, la precisión es de únicamente un 80\%. La diferencia de precisión entre ambos clasificadores se debe a la complejidad del problema, ya que incluso se han tenido dudas a la hora elegir qué etiquetas usar de forma manual.
 
-\imagen{precision_modelo_inv2}{Precisión del clasificador Modelo/No modelo}
-\imagen{precision_cara_inv2}{Precisión del clasificador Cara/No cara}
+\imagen{precision_cara}{Precisión del clasificador Cara/No cara}
 
 El número de iteraciones para el entrenamiento ha sido de 10 para ambos clasificadores. Se ha probado con distintos números de iteraciones pero la precisión obtenida no variaba o decrecía.
+
+\imagen{summary}{Resumen de las capas del clasificador de imágenes}
 
 \subsection{Problemas encontrados}
 

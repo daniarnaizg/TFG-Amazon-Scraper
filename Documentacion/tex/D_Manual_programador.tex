@@ -2,10 +2,151 @@
 
 \section{Introducción}
 
+Esta sección se encarga de detallar los conceptos relacionados con la documentación técnica que sigue el proyecto. Se tratará de explicar la estructura de directorios que sigue el proyecto, así como los pasos a seguir para ser instalado y ejecutado.
+
 \section{Estructura de directorios}
+
+A continuación se muestra la estructura de directorios en la que se distribuye el proyecto:
+
+\begin{itemize}
+    \item \textbf{Scrapy/} Directorio principal de Scrapy. Se compone de los siguientes archivos y subdirectorios:
+        \begin{itemize}
+            \item \textbf{amazon/spiders/} Directorio donde se encuentran las diferentes \english{spiders}.
+                \begin{itemize}
+                    \item \textbf{urls\_spiders.py} \english{Spider} utilizada para extraer los enlaces de los productos.
+                    \item \textbf{products\_spiders.py} \english{Spider} utilizada para extraer los principales campos de cada producto.
+                    \item \textbf{comments\_spiders.py} \english{Spider} utilizada para extraer los comentarios asociados a cada producto.
+                \end{itemize}
+            \item \textbf{amazon/items.py} Fichero que recoge los diferentes campos que extrae Scrapy.
+            \item \textbf{amazon/middlewares.py} Fichero que recoge la configuración de los \english{middlewares} se Scrapy si los hubiera.
+            \item \textbf{amazon/pipelines.py} Fichero que se encarga del almacenamiento en la base de datos de los campos extraídos.
+            \item \textbf{amazon/settings.py} Fichero de configuración del proyecto de Scrapy.
+        \end{itemize}
+    \item \textbf{Documentacion/} Este directorio contiene todos los archivos relacionados con la documentación y la memoria del proyecto, Tanto los ficheros fuente de \LaTeX{}, como los PDFs ya finalizados.
+    \item \textbf{Colab notebooks/} Directorio donde se encuentran los \english{notebooks} de Google Colab utilizados en el proyecto:
+        \begin{itemize}
+            \item \textbf{Clasificador\_Modelo\_Sin\_modelo.ipynb} \english{Notebook} encargado del entrenamiento del clasificador de  imágenes que detecta si hay un modelo en la imágen o no.
+            \item \textbf{Clasificador\_cara\_sin\_cara.ipynb} \english{Notebook} encargado del entrenamiento del clasificador de  imágenes que detecta si la cara de un modelo es visible o no.
+            \item \textbf{Clasificador\_final\_excel\_db.ipynb} \english{Notebook} encargado de la clasificación de imágenes y su posterior almacenamiento en la base de datos y documento Excel.
+        \end{itemize}
+    \item \textbf{Databases/} Carpeta que contiene las diferentes bases de datos utilizadas durante la realización del proyecto.
+    \item \textbf{Datasets/} Directorio que recoge los \english{datasets} utilizados para el entrenamiento de los clasificadores:
+        \begin{itemize}
+            \item \textbf{dataset-modelo.zip} \english{Dataset} que contiene las imágenes ya etiquetadas utilizadas para el entrenamiento del clasificador de imágenes que detecta modelos.
+            \item \textbf{dataset-cara.zip} \english{Dataset} que contiene las imágenes ya etiquetadas utilizadas para el entrenamiento del clasificador de imágenes que detecta caras.
+        \end{itemize}
+    \item \textbf{Keras models/} Directorio donde encontramos los clasificadores de Keras ya entrenados para su posterior utilización:
+        \begin{itemize}
+            \item \textbf{clasificador-modelo.zip} Clasificador de imágenes encargado de detectar modelos ya entrenado y listo para su utilización.
+            \item \textbf{clasificador-cara.zip} Clasificador de imágenes encargado de detectar caras ya entrenado y listo para su utilización.
+        \end{itemize}
+    \item \textbf{Outputs/} Directorio donde se guardan todos los resultados del proyecto: Archivos JSON y documentos Excel.
+    \item \textbf{Scripts/} Directorio que incluye algunos \english{scripts} utilizados para algunas tareas del proyecto:
+        \begin{itemize}
+            \item \textbf{JSONmerger.py} \english{Script} que combina los campos de dos archivos JSON utilizando el campo <<url>> como elemento identificador.
+            \item \textbf{dataextractor.py} \english{Script} que descarga imágenes dada su URL y las renombra en funcion de cómo han sido etiquetadas. Utilizado para la creación de los \english{datasets}.
+            \item \textbf{dataturks\_fixer.py} \english{Script} usado para arreglar el JSON generado por Dataturks para su correcto funcionamiento.
+            \item \textbf{url\-extractor.py} \english{Script} que extrae los enlaces de las imágenes de cada producto y lo añade a una lista para posteriormente etiquetarlo en Dataturks.
+        \end{itemize}
+\end{itemize}
 
 \section{Manual del programador}
 
+Apartado que detalla algunos de los procesos llevados a cabo en el proyecto necesarios para que pueda seguir desarrollándose.
+
+\subsection{Manual de Scrapy}
+
+Para la creación del proyecto de Scrapy es necesaria la instalación de la librería. Esto se puede hacer de varias formas, tal y como describe la documentación oficial\footnote{\url{http://doc.scrapy.org/en/latest/intro/install.html}}:
+
+\begin{itemize}
+    \item \textbf{Utilizando Conda:} Se instala la librería con el siguiente comando:
+        \begin{verbatim}
+        conda install -c conda-forge scrapy
+        \end{verbatim}
+    \item \textbf{Utilizando PIP:} Se instala la librería con el siguiente comando:
+        \begin{verbatim}
+        pip install Scrapy
+        \end{verbatim}
+\end{itemize}
+
+Una vez instalado el paquete de Scrapy, la creación de un nuevo proyecto es sencilla:
+
+\begin{verbatim}
+    scrapy startproject [nombre_proyecto]
+\end{verbatim}
+
+Este comando se encarga de crear la estructura de carpetas necesaria para el correcto funcionamiento de Scrapy. A continuación se detalla el proceso a seguir para añadir \english{spiders} al proyecto:
+
+\begin{verbatim}
+    cd [nombre_proyecto]
+    scrapy genspider [nombre_spider] [direccion_web]
+\end{verbatim}
+
+En cuanto a la ejecución de un \english{spider}, se hace con el siguiente comando:
+
+\begin{verbatim}
+    scrapy crawl [nombre_spider] -o [nombre_output]
+\end{verbatim}
+
+\subsection{Manual de Dataturks}
+
+A continuación se detallará el proceso a seguir para el etiquetado manual de imágenes con la ayuda de la herramienta Dataturks\footnote{\url{https://dataturks.com/}}.
+
+\begin{enumerate}
+    \item Iniciar sesión por medio de GiHub o creando una cuenta a parte.
+    \item Crear un nuevo \english{dataset} y elegir el tipo adecuado, en este caso será el llamado \english{Image Classification}.
+    
+    \imagen{anexos/dataturks_proyecto}{Tipo de \english{dataset} a crear en Dataturks}
+    
+    \item Configurar el funcionamiento del \english{dataset}
+    
+    \imagen{anexos/dataturks_inst}{Creación de un \english{dataset} en Dataturks}
+    
+    \item Importar una lista con los enlaces a las imágenes que se desean etiquetar. Deberán estar en un documento \english{txt}.
+    
+    \item Una vez subidas las imágenes, se puede empezar a etiquetar seleccionando la etiqueta adecuada en cada caso.
+    
+    \imagen{dataturks}{Proceso de etiquetado manual en Dataturks}
+    
+    \item Por último, para exportar los resultados simplemente se ha de descargar el archivo generado pulsando en el botón \english{Download}.
+    
+\end{enumerate}
+
+\subsection{Entrenamiento de los clasificadores}
+
+El proceso de entrenamiento de los clasificadores es muy sencillo ya que está muy automatizado. Los \english{notebooks} se encargan de descargar y descomprimir el \english{dataset} previamente subido al repositorio del proyecto para así entrenar el clasificador. Una vez entrenado, se muestra la precisión alcanzada y un resumen de las capas utilizadas por el modelo de Keras.
+
+Por último se descarga el clasificador ya entrenado para su posterior uso.
+
 \section{Compilación, instalación y ejecución del proyecto}
 
-\section{Pruebas del sistema}
+Lo más importante a la hora de instalar y ejecutar este proyecto es la parte de Scrapy. Puesto que en el repositorio ya se encuentra el proyecto de Scrapy al completo, lo primero será descargar el contenido del repositorio. Para ello se utiliza el siguiente comando:
+
+\begin{verbatim}
+    git clone https://github.com/daniarnaizg/TFG-Amazon-Scraper.git
+\end{verbatim}
+
+Con esto, quedará descargado el repositorio. Lo siguiente será instalar el paquete de Scrapy si no se tiene instalado (Ver manual de Scrapy en la sección anterior).
+
+También es necesaria la instalación de dos paquetes, se pueden instalar por medio de PIP:
+
+\begin{verbatim}
+    pip install js2xml
+    pip install pypiwin32
+\end{verbatim}
+
+A partir de aquí simplemente se puede lanzar una \english{spider}, tal y cómo se ha mostrado antes. Es necesario indicar el fichero al que se desea exportar el contenido descargado en formato JSON:
+
+\begin{verbatim}
+    scrapy crawl urls_spider -o urls_output.json
+    scrapy crawl products_spider -o products_output.json
+    scrapy crawl comments_spider -o comments_output.json
+\end{verbatim}
+
+En cuanto a la ejecución de los \english{notebooks}, esto se hará importandolos en el entondo de Google Colab a través del siguiente enlace:
+\newline
+\newline
+\url{https://colab.research.google.com/}
+
+
+%\section{Pruebas del sistema}

@@ -11,12 +11,17 @@ class ProductsSpider(scrapy.Spider):
 	allowed_domains = ['amazon.com']
 	
 	list_urls = []
-	with open('../../outputs/prueba-prices-urls.json') as json_data:
-		urls = json.load(json_data)
-		for i in range(len(urls)):
-			list_urls = list_urls + urls[i]['page_urls']
-			
-		start_urls = list_urls
+
+	try:
+		with open('./url-output.json') as json_data:
+			urls = json.load(json_data)
+			for i in range(len(urls)):
+				list_urls = list_urls + urls[i]['page_urls']
+
+			start_urls = list_urls
+	except:
+		pass
+
 
 	# Función que extrae el precio mínimo de un rango de precios aplicando expresion regular
 	def get_min_price(self, price_range):

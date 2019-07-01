@@ -2,12 +2,218 @@
 
 \section{Introducción}
 
+La planificación de un proyecto es quizás la fase mas importante de éste. Una buena planificación consigue que el desarrollo del proyecto siga su curso con normalidad y con el mínimo número de imprevistos. A la hora de planificar el proyecto, son varias las partes a tener en cuenta: tiempo, trabajo, y dinero.
+
+A continuación se tratarán los detalles del plan de proyecto llevado a cabo en dos secciones:
+
+\begin{description}
+    \item[Planificación temporal:] En este apartado se analizará y explicará cómo se ha planificado el tiempo durante el desarrollo del proyecto teniendo en cuenta el trabajo necesario para cada parte.
+    \item[Estudio de viabilidad:] En este apartado se estudiará la viabilidad del proyecto en distintos campos:
+    \begin{description}
+        \item[Viabilidad económica:] Estimación de los costes y beneficios del proyecto.
+        \item[Viabilidad legal:] Análisis sobre los conceptos legales del proyecto, esto engloba las licencias y políticas utilizadas.
+    \end{description}
+\end{description}
+
 \section{Planificación temporal}
+
+Antes de empezar con el análisis sobre la planificación temporal es necesario añadir que se ha seguido una metodología ágil para la realización del proyecto, más en concreto se ha seguido el método \english{Scrum}. Es por esto que el desarrollo del proyecto se ha dividido en diferentes \english{sprints}, con reuniones entre todos los integrantes del proyecto para tratar los cambios y las siguientes tareas a realizar.
+
+A continuación se mostrarán las principales características de cada \english{sprint} junto con un gráfico \english{burndown} generado con la ayuda de la extensión ZenHub y GitHub.
+
+\subsection{\english{Sprint} 1} %(18/11/2018 - 24/3/2019)}
+El primer \english{sprint} ha resultado ser el más largo. Esto se debe a que el desarrollo del proyecto comenzó mas tarde de lo que en un principio se había planeado. Como se puede ver en el gráfico \english{burndown} a continuación, en el último tramo del \english{sprint} es cuando de verdad las tareas propuestas comienzan a darse por completadas.
+
+\imagen{anexos/sprint1}{Gráfico \english{burndown} del \english{sprint} 1}
+
+Este primer \english{sprint} se centra principalmente en la puesta en marcha de las principales herramientas a utilizar, además de la toma de algunas decisiones como pueden ser la elección de qué \english{web scraper} y etiquetador de imágenes utilizar.
+
+Debido a la extensa duración de este \english{sprint}, al finalizar ya encontramos algunas tareas más avanzadas completadas:
+
+\begin{itemize}
+    \item Primeras versiones de \english{spiders} funcionales.
+    \item Etiquetado manual de un número reducido de imágenes.
+    \item Extracción de los primeros productos con sus respectivos campos.
+\end{itemize}
+
+
+\subsection{\english{Sprint} 2} %(17/3/2018 - 12/4/2019)}
+ Este \english{sprint} cuenta con una duración mucho menor al anterior. Es aquí donde comienza la familiarización con \LaTeX{} y las primeras mejoras al \english{web scraper}.
+ 
+\imagen{anexos/sprint2}{Gráfico \english{burndown} del \english{sprint} 2}
+ 
+Las tareas realizadas en este \english{sprint} han sido las siguientes:
+ 
+\begin{itemize}
+    \item Prueba con nuevas etiquetas en el clasificador manual de imágenes.
+    \item Comenzar con la documentación del proyecto.
+    \item Modificación de los campos a extraer en el \english{web scraper}.
+\end{itemize}
+
+
+\subsection{\english{Sprint} 3} %(12/4/2018 - 3/5/2019)}
+Este \english{sprint} se centra en añadir nuevas funcionalidades al proyecto, como pueden ser el almacenamiento en la base datos o la extracción de comentarios.
+
+\imagen{anexos/sprint3}{Gráfico \english{burndown} del \english{sprint} 3}
+
+Las tareas realizadas en este \english{sprint} han sido las siguientes:
+ 
+\begin{itemize}
+    \item Extracción de comentarios asociados a cada producto.
+    \item Comenzar a hacer pruebas con el almacenamiento en una base de datos.
+    \item Estudiar como generar un documento Excel a partir de los datos extraídos.
+    \item Buscar información sobre como aplicar regresión lineal sobre la información extraída.
+\end{itemize}
+
+\subsection{\english{Sprint} 4} %(3/5/2018 - 20/5/2019)}
+Este \english{sprint} ha estado orientado sobre todo a la investigación de posibles modificaciones y mejoras.
+
+\imagen{anexos/sprint4}{Gráfico \english{burndown} del \english{sprint} 4}
+
+Las tareas realizadas en este \english{sprint} han sido las siguientes:
+ 
+\begin{itemize}
+    \item Investigación sobre OpenCV y sus librerías de detección facial.
+    \item Primeras iteraciones del clasificador automático de imágenes.
+    \item Probar el funcionamiento del detector facial sobre nuestro propio \english{dataset}.
+    \item Añadir los enlaces de productos para mujeres en el \english{web scraper}.
+    \item Añadir un nuevo campo con el sexo al que va dirigido un artículo a la hora de extraer los productos.
+\end{itemize}
+
+
+\subsection{\english{Sprint} 5} %(22/5/2018 - 15/6/2019)}
+\english{Sprint} algo más extenso que se centra principalmente en la primera versión funcional del clasificador automático y la resolución de algunos problemas encontrados.
+
+\imagen{anexos/sprint5}{Gráfico \english{burndown} del \english{sprint} 5}
+
+Las tareas realizadas en este \english{sprint} han sido las siguientes:
+
+\begin{itemize}
+    \item Extracción de 1000 productos para la creación del \english{dataset}a final.
+    \item Primera versión funcional del clasificador automático Modelo/No modelo.
+    \item Primeras pruebas con la detección de caras parcialmente visibles.
+    \item Investigar sobre como generar un domuento Excel a partir de la base de datos.
+\end{itemize}
+
+
+\subsection{\english{Sprint} 6} %(16/6/2018 - 30/6/2019)}
+\english{Sprint} final del proyecto. Es aquí donde se finaliza el proyecto y se hace casi la totalidad de la documentación.
+
+\imagen{anexos/sprint5}{Gráfico \english{burndown} del \english{sprint} 6}
+
+Las tareas realizadas en este \english{sprint} han sido las siguientes:
+
+\begin{itemize}
+    \item Separación del campo que recoge el rango de precios de un producto en dos: precio mínimo y precio máximo.
+    \item Revisión y actualización de los nombres de las tablas y los campos de la base de datos.
+    \item Finalización de la documentación del proyecto y sus respectivos anexos.
+    \item Finalización de los \english{notebooks} de entrenamiento y clasificación de imágenes.
+\end{itemize}
+
+
 
 \section{Estudio de viabilidad}
 
 \subsection{Viabilidad económica}
 
+En este apartado se analizará los costes y beneficios estimados de este proyecto en un entorno empresarial.
+
+\subsection{Costes}
+\subsubsection{Costes de personal}
+La totalidad de este proyecto ha sido desarrollada por una única persona a tiempo parcial durante un periodo aproximado de 5 meses. Aplicando el salario mínimo y las cuotas de la Seguridad social\footnote{\url{http://www.seg-social.es/wps/portal/wss/internet/Trabajadores/CotizacionRecaudacionTrabajadores/36537}}, se puede estimar un coste de personal de la siguiente forma:
+
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{@{}l|l@{}}
+		\toprule
+		Concepto & Coste (\euro) \\
+		\midrule
+		Salario neto & \EUR{1000}  \\
+		Retención IRPF (19 \%) & \EUR{360,53} \\
+		Seguridad social (28,30 \%) & \EUR{537,00} \\
+		\midrule
+		Salario total (mensual) & \EUR{1897,53} \\
+		\midrule
+		Total 5 meses & \EUR{9.487,65} \\
+		\bottomrule
+	\end{tabular}
+	\caption{Costes de personal}
+	\label{tab:personal}
+\end{table}
+
+\subsubsection{Costes de material}
+
+En cuanto a los costes materiales y a nivel de programas informáticos, el único gasto es el del ordenador utilizado para la realización del proyecto. Todas las librerías utilizadas son gratuitas y no es necesario la contratación de un servidor para el funcionamiento del proyecto.
+
+Por lo tanto, asociando un valor aproximado de 1300\euro\ al ordenador y estimando una amortización de 5 años, el coste total de materiales para estos 5 meses es el siguiente:
+
+$$\dfrac{\textup{1.300 \euro}}{5\ años * 12\ meses} = \textup{21,67 \euro} $$
+
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{@{}l|l|l@{}}
+		\toprule
+		\textbf{Concepto} & \textbf{Coste} & \textbf{Amortización} \\
+		\midrule
+		Ordenador & 1.300 \euro & 21,67 \euro \\
+		\midrule
+		\textbf{Total 5 meses} & 108,34 \euro \\
+		\bottomrule
+	\end{tabular}
+	\caption{Costes de hardware}
+	\label{tab:hardware}
+\end{table}
+
+
+\subsubsection{Coste total}
+
+A continuación se muestra el coste total del proyecto: 
+
+\FloatBarrier
+\begin{table}[h]
+	\centering
+	\begin{tabular}{@{}l|l@{}}
+		\toprule
+		\textbf{Concepto} & \textbf{Coste} \\
+		\midrule
+		Personal & 9.487,65 \euro \\
+		Material & 108,34 \euro \\
+		\midrule
+		\textbf{Total} & 9.595,99 \euro \\
+		\bottomrule
+	\end{tabular}
+	\caption{Costes totales del proyecto}
+	\label{tab:total}
+\end{table}
+\FloatBarrier
+
+\subsection{Beneficios}
+En cuanto a los beneficios del proyecto, no se desarrollado teniendo como meta la generación de ingresos. Se podría comercializar cobrando una tarifa mensual a los clientes u ofreciendo un servicio personalizado a cada cliente que dependería del número de productos a extraer.
+
+
 \subsection{Viabilidad legal}
 
+Para el estudio de la viabilidad del producto, se van a analizar las librerías usadas en el proyecto, anotando las licencias de las que hacen uso. A continuación se listan:
 
+\begin{savenotes}
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{l|l|l}
+		\hline
+		Dependencia & Versión & Licencia \\ \hline
+		Scrapy & 1.5.1 & BSD \\
+		Pillow & 6.0.0 & PIL\footnote{\url{http://www.pythonware.com/products/pil/license.htm}} \\
+		requests & 2.21.0 & MIT \\
+		js2xml & 0.3.1 & MIT \\
+		Keras & 2.3.1 & MIT \\
+		Numpy & 1.16.4 & BSD \\
+		OpenCV & 4.1.0 & BSD \\
+		JSON & \ \ \ \ \ - & FREE \\
+		SQLite & 3.28.0 & FREE \\
+		Pandas & 0.24.2 & BSD \\
+		\bottomrule
+	\end{tabular}
+	\caption{Licencias utilizadas}
+	\label{tab:licencias}
+\end{table}
+\end{savenotes}
