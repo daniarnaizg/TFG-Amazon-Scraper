@@ -62,7 +62,16 @@ En cuanto a la arquitectura de Scrapy, hay que destacar los tres principales blo
     \item[\english{Pipelines}:] Apartado responsable de procesar los \english{items} una vez han sido extraidos por las \english{spiders}. En este proyecto se han usado para almacenar los campos extraídos en una base de datos.
 \end{description}
 
-\imagen{scrapy_architecture}{Arquitectura que sigue Scrapy y sus diferentes componentes}
+\FloatBarrier
+    \begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{scrapy_architecture}
+    \caption[Arquitectura que sigue Scrapy y sus diferentes componentes]{Arquitectura que sigue Scrapy y sus diferentes componentes.
+    \newline
+    Imagen extraída de \url{https://doc.scrapy.org/en/0.10.3/topics/architecture.html}}
+    \label{fig}
+    \end{figure}
+\FloatBarrier
 
 \subsection{\english{Spiders} utilizados}
 El primer \english{spider} se encarga de extraer los enlaces a los productos. Para ello partimos de la página principal donde se encuentran todos los artículos a extraer. Cabe destacar que no existe un enlace que de acceso a una página web que contenga los productos orientados a ambos sexos, por lo que en caso de querer artículos para hombres y mujeres se necesita una url para cada sexo.
@@ -118,7 +127,6 @@ Algunos de los recursos que se han utilizado para una posible detección parcial
     \item \english{Dealing with Inaccurate Face Detection for Automatic Gender Recognition with Partially Occluded Faces}: \url{http://repositori.uji.es/xmlui/bitstream/handle/10234/23941/34130.pdf}
 \end{itemize}
 
-%\imagen{cara_parcial}{Modelo con la cara parcialmente visible}
 \imagen{cara_espalda_parcial}{Ejemplos de modelos con la cara parcialmente visible}
 
 \section{Etiquetado automático de las imágenes}
@@ -132,13 +140,21 @@ Para el etiquetado automático de imágenes se ha decidido usar Keras. Existen o
     \item[Compatibilidad:] Keras es compatible con Google Cloud\footnote{\url{https://cloud.google.com/tpu/}} y Tarjetas gráficas NVIDIA\footnote{\url{https://developer.nvidia.com/deep-learning}}, gracias a ello funciona de forma nativa con Google Colab.
 \end{description}
 
+\newpage
+
 \subsection{Validación cruzada}
 Para el entrenamiento de estos clasificadores se ha usado la técnica de validación cruzada. Esta técnica consiste en dividir el \english{dataset} en dos conjuntos complementarios y realizar el análisis sobre un subconjunto para luego validarlo con los datos del otro subconjunto. La principal ventaja de este método es que es muy rápido de computar.
 
 Existen variaciones de este método, en el que se suceden varias iteraciones, obteniendo así una mayor precisión. En este caso se ha optado por el método de validación cruzada aleatoria ya que la precisión era aceptable y Keras dispone de una función que facilita este procedimiento \cite{wiki:cruzada}. 
 
-\imagen{Random_cross_validation}{Validación cruzada aleatoria con $k$ iteraciones}
-%\imagen{test_train}{Diagrama de conjuntos de entrenamiento y validación}
+\FloatBarrier
+    \begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Random_cross_validation}
+    \caption[Validación cruzada aleatoria con $k$ iteraciones]{Validación cruzada aleatoria con $k$ iteraciones. Imagen extraída de \url{https://es.wikipedia.org/wiki/Validacion\_cruzada}}
+    \label{fig}
+    \end{figure}
+\FloatBarrier
 
 Para los clasificadores entrenados en este proyecto, se ha hecho una división del 75\% para el conjunto de entrenamiento y un 25\% para el conjunto de test. En el caso del clasificador que identifica si aparece un modelo o no, se obtiene una precisión de aproximadamente un 93\%. En cambio, para el clasificador que indica si parece la cara del modelo, la precisión es de únicamente un 80\%. La diferencia de precisión entre ambos clasificadores se debe a la complejidad del problema, ya que incluso se han tenido dudas a la hora elegir qué etiquetas usar de forma manual.
 
@@ -179,5 +195,33 @@ La base de datos utilizada para almacenar los diferentes productos no es muy com
 \end{itemize}
 
 Por último, es necesario añadir el proceso de creación de un documento Excel a partir de la base de datos ya completada. Para esto se ha utilizado una librería de Python llamada Pandas\footnote{\url{https://pandas.pydata.org/pandas-docs/stable/index.html}}, la cual extrae la información de la base de datos y la exporta a un documento Excel creando una página por cada tabla existente en la base de datos.
+\newline
 
-\imagen{bd_diagram}{Diagrama de la base de datos utilizada.}
+\FloatBarrier
+    \begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{bd_diagram}
+    \caption[Diagrama de la base de datos utilizada]{Diagrama de la base de datos utilizada. Diagrama creado con \url{https://dbdiagram.io/}}
+    \label{fig}
+    \end{figure}
+\FloatBarrier
+
+\newpage
+
+\section{Interpretación de los datos extraídos}
+
+Para la interpretación de los resultados obtenidos se ha contado con la colaboración de 3 miembros del grupo de investigación Investigación en Marketing e innovación (I+M+i)\footnote{\url{https://www.ubu.es/investigacion-en-marketing-e-innovacion-imi}} y profesoras del área de Área de Comercialización e Investigación de Mercados del Departamento de Economía y Administración de Empresas, que han estado presentes en algunas de las reuniones:
+
+\begin{itemize}
+    \item Sonia San Martin Gutierrez
+    \item Nadia Huitzilin Jimenez Torres
+    \item Paula Rodriguez Torrico
+\end{itemize}
+
+A continuación se recoge una posible interpretación de estos resultados. Es necesario tener en cuenta que el conjunto de datos utilizado para estos cálculos es relativamente pequeño y para un estudio de más envergadura serían necesarios alrededor de 5.000 o 10.000 productos.
+
+Se analizó de forma descriptiva mediante la prueba X2\footnote{\url{https://es.wikipedia.org/wiki/Prueba_\%CF\%87\%C2\%B2_de_Pearson}} la información de 571 modelos de camisetas la categoría de producto (ropa) comercializada a través de la página web de <<Amazon.com>> con ayuda del programa IBM SPSS Statistics 19\footnote{\url{https://www.ibm.com/es-es/products/spss-statistics}}.
+
+Se analizó si en la imagen del producto se publicitaba la categoría de producto sin o con modelo (y distinguiendo si aparecía el rostro de una persona o no) en función del género al que va dirigido el producto (i.e. el mercado objetivo). Debido a que los resultados del análisis bivariante sugieren la existencia de una relación significativa entre el género y cómo se publicita la categoría de producto ($X2: 12,26; p<0,05$).
+
+En resumen, se podría concluir de este análisis que, los productos en la categoría analizada (camisetas) son los que más que se publicitan sin que aparezca un modelo en la imagen del producto para el mercado masculino (86\%). Mientras que, para el caso del mercado femenino (32\%) los productos en la categoría analizada se publicitan más con una modelo sin cara.

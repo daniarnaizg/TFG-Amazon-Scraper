@@ -22,25 +22,25 @@ A continuación se muestra la estructura de directorios en la que se distribuye 
             \item \textbf{amazon/pipelines.py} Fichero que se encarga del almacenamiento en la base de datos de los campos extraídos.
             \item \textbf{amazon/settings.py} Fichero de configuración del proyecto de Scrapy.
         \end{itemize}
-    \item \textbf{Documentacion/} Este directorio contiene todos los archivos relacionados con la documentación y la memoria del proyecto, Tanto los ficheros fuente de \LaTeX{}, como los PDFs ya finalizados.
     \item \textbf{Colab notebooks/} Directorio donde se encuentran los \english{notebooks} de Google Colab utilizados en el proyecto:
         \begin{itemize}
             \item \textbf{Clasificador\_Modelo\_Sin\_modelo.ipynb} \english{Notebook} encargado del entrenamiento del clasificador de  imágenes que detecta si hay un modelo en la imágen o no.
             \item \textbf{Clasificador\_cara\_sin\_cara.ipynb} \english{Notebook} encargado del entrenamiento del clasificador de  imágenes que detecta si la cara de un modelo es visible o no.
-            \item \textbf{Clasificador\_final\_excel\_db.ipynb} \english{Notebook} encargado de la clasificación de imágenes y su posterior almacenamiento en la base de datos y documento Excel.
+            \item \textbf{Clasificador\_final\_+\_excel\_+\_db.ipynb} \english{Notebook} encargado de la clasificación de imágenes y su posterior almacenamiento en la base de datos y documento Excel.
         \end{itemize}
-    \item \textbf{Databases/} Carpeta que contiene las diferentes bases de datos utilizadas durante la realización del proyecto.
+    \item \textbf{Databases/} Carpeta donde se genera la abse de datos una vez finalizado el proceso de \english{web scraping}.
     \item \textbf{Datasets/} Directorio que recoge los \english{datasets} utilizados para el entrenamiento de los clasificadores:
         \begin{itemize}
             \item \textbf{dataset-modelo.zip} \english{Dataset} que contiene las imágenes ya etiquetadas utilizadas para el entrenamiento del clasificador de imágenes que detecta modelos.
             \item \textbf{dataset-cara.zip} \english{Dataset} que contiene las imágenes ya etiquetadas utilizadas para el entrenamiento del clasificador de imágenes que detecta caras.
         \end{itemize}
-    \item \textbf{Keras models/} Directorio donde encontramos los clasificadores de Keras ya entrenados para su posterior utilización:
+    \item \textbf{Documentacion/} Este directorio contiene todos los archivos relacionados con la documentación y la memoria del proyecto, Tanto los ficheros fuente de \LaTeX{}, como los PDFs ya finalizados.
+    \item \textbf{Keras\_models/} Directorio donde encontramos los clasificadores de Keras ya entrenados para su posterior utilización:
         \begin{itemize}
-            \item \textbf{clasificador-modelo.zip} Clasificador de imágenes encargado de detectar modelos ya entrenado y listo para su utilización.
-            \item \textbf{clasificador-cara.zip} Clasificador de imágenes encargado de detectar caras ya entrenado y listo para su utilización.
+            \item \textbf{clasificador-modelo.h5} Clasificador de imágenes encargado de detectar modelos ya entrenado y listo para su utilización.
+            \item \textbf{clasificador-cara.h5} Clasificador de imágenes encargado de detectar caras ya entrenado y listo para su utilización.
         \end{itemize}
-    \item \textbf{Outputs/} Directorio donde se guardan todos los resultados del proyecto: Archivos JSON y documentos Excel.
+    \item \textbf{Outputs/} Directorio donde se guardan todos los resultados del proyecto: Archivos JSON, documentos Excel y bases de datos ya completados.
     \item \textbf{Scripts/} Directorio que incluye algunos \english{scripts} utilizados para algunas tareas del proyecto:
         \begin{itemize}
             \item \textbf{JSONmerger.py} \english{Script} que combina los campos de dos archivos JSON utilizando el campo <<url>> como elemento identificador.
@@ -48,6 +48,7 @@ A continuación se muestra la estructura de directorios en la que se distribuye 
             \item \textbf{dataturks\_fixer.py} \english{Script} usado para arreglar el JSON generado por Dataturks para su correcto funcionamiento.
             \item \textbf{url\-extractor.py} \english{Script} que extrae los enlaces de las imágenes de cada producto y lo añade a una lista para posteriormente etiquetarlo en Dataturks.
         \end{itemize}
+    \item \textbf{Videos/} Directorio que recoge los vídeos que muestran el proceso de ejecución del proyecto.
 \end{itemize}
 
 \section{Manual del programador}
@@ -128,11 +129,12 @@ Lo más importante a la hora de instalar y ejecutar este proyecto es la parte de
 
 Con esto, quedará descargado el repositorio. Lo siguiente será instalar el paquete de Scrapy si no se tiene instalado (Ver manual de Scrapy en la sección anterior).
 
-También es necesaria la instalación de dos paquetes, se pueden instalar por medio de PIP:
+También es necesaria la instalación de varios paquetes, se pueden instalar por medio de PIP:
 
 \begin{verbatim}
     pip install js2xml
     pip install pypiwin32
+    pip install Scrapy-UserAgents
 \end{verbatim}
 
 A partir de aquí simplemente se puede lanzar una \english{spider}, tal y cómo se ha mostrado antes. Es necesario indicar el fichero al que se desea exportar el contenido descargado en formato JSON:
@@ -143,8 +145,10 @@ A partir de aquí simplemente se puede lanzar una \english{spider}, tal y cómo 
     scrapy crawl comments_spider -o comments_output.json
 \end{verbatim}
 
-En cuanto a la ejecución de los \english{notebooks}, esto se hará importandolos en el entondo de Google Colab a través del siguiente enlace:
-\newline
+Es importante tener en cuenta el nombre del fichero JSON ya que por defecto está configurado para leer los campos de los ficheros con estos nombres.
+Se puede utilizar otro nombre siempre y cuando se cambie el nombre del archivo de entrada en el código de la \english{spider}.
+
+En cuanto a la ejecución de los \english{notebooks}, esto se hará importando los archivos \english{ipynb} en el entorno de Google Colab a través del siguiente enlace:
 \newline
 \url{https://colab.research.google.com/}
 

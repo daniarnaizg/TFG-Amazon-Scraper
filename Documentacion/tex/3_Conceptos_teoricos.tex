@@ -19,7 +19,7 @@ A partir de los años 60, el principal enfoque de los investigadores se centró 
 
 Tras un largo periodo sin avances notables debido a una escasez de financiaciones para el desarrollo de la inteligencia artificial, a finales de los años 90, el desarrollo resurge gracias a grandes corporaciones interesadas en usar este campo para lograr unas ventajas y beneficios nunca vistos, Es así como en 1997 la máquina Deep Blue\footnote{\url{https://es.wikipedia.org/wiki/Deep_Blue_(computadora)}} de IBM se convirtió en la primera computadora capaz de derrotar a un campeón mundial de ajedrez como lo fue Garry Kasparov.
 
-En los ultimos 15 años, las principales empresas mundiales han utilizado la inteligencia artificial como una herramienta más a la hora de crecer y convertirse en el sector más importante del mundo, gracias a campos como la visión artificial, minería de datos o el procesamiento de lenguajes naturales \cite{aihistory}.
+En los últimos 15 años, las principales empresas mundiales han utilizado la inteligencia artificial como una herramienta más a la hora de crecer y convertirse en el sector más importante del mundo, gracias a campos como la visión artificial, minería de datos o el procesamiento de lenguajes naturales \cite{aihistory}.
 
 \subsection{Machine Learning (Aprendizaje automático)}
 El \english{Machine Learning} se considera un campo de las ciencias de computación y a su vez una rama de la inteligencia artificial. Tiene como objetivo principal el desarrollo de técnicas y la búsqueda de algoritmos y heurísticas que permitan que las computadoras aprendan por si mismas a través de la experiencia.
@@ -31,6 +31,9 @@ Encontramos así:
 
 \begin{description}
     \item[Aprendizaje supervisado] Produce una función que establece una correspondencia entre las entradas y salidas deseadas. Un posible uso de estos algoritmos podría ser un problema de clasificación en el que hay que etiquetar una serie de valores usando una entre varias categorías. En este tipo de aprendizaje, la base del conocimiento estaría formada por ejemplos de etiquetados anteriores.
+    
+    \newpage
+    
     \item[Aprendizaje no supervisado] En este caso el proceso se lleva a cabo por un conjunto de datos únicamente formado por entradas al sistema que no contienen información sobre las categorías de cada ejemplo. El sistema debe reconocer los patrones de forma autónoma para encontrar grupos de elementos comunes y asignar las nuevas entradas a dichos grupos.
     \item[Aprendizaje semi-supervisado] Estos algoritmos combinan los dos anteriores para clasificar teniendo en cuenta los datos clasificados y los no clasificados.
     \item[Aprendizaje por refuerzo] En este tipo de algoritmos, el sistema aprende observando lo que le rodea, es decir, su información de entrada se basa en la retroalimentación que obtiene como respuesta a sus acciones. Se podría decir que aprende a base de prueba-error.
@@ -45,6 +48,9 @@ El cerebro se puede llegar a ver como un sistema inteligente, aunque de manera d
 
 \subsection{Neurona artificial}
 El primer modelo de neurona artificial, con el objetivo de llevar a cabo tareas muy simples, fue creado por el neuroanatomista Warren McCulloch y el matemático Walter Pitts y consta de las siguientes partes:
+
+\newpage
+
 \begin{itemize}
     \item Conjunto de entradas $x_1$, $x_2$, ... $x_n$
     \item Pesos sinápticos $w_1$, $w_2$, ... $w_n$, correspondientes a cada entrada
@@ -52,16 +58,33 @@ El primer modelo de neurona artificial, con el objetivo de llevar a cabo tareas 
     \item Una función de activación, $f$
     \item Una salida, $Y$
 \end{itemize}
-\imagen{neurona_artificial}{Diferenciación entre una neurona biológica y una neurona artificial}
-%\caption[Diferenciación entre una neurona biológica y una neurona artificial]{Extraído de \url{http://www.cs.us.es/\~fsancho/?e=72}}
+
+\FloatBarrier
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.9\textwidth]{neurona_artificial}
+\caption[Diferenciación entre una neurona biológica y una neurona artificial]{Diferenciación entre una neurona biológica y una neurona artificial.
+\newline
+Imagen extraída de \url{http://www.cs.us.es/~fsancho/?e=72}}
+\label{fig}
+\end{figure}
+\FloatBarrier
 
 \subsection{Perceptrón}
  Un perceptrón es el modelo más simple de una neurona artificial, está basado en una única neurona y posee una única salida. El perceptrón puede combinarse con otros tipos de perceptrones o neuronas artificiales para formar una red neuronal mas compleja.
  
  A su vez, un perceptrón puede organizar sus neuronas en capas: capa de entrada, una capa de salida, y múltiples capas ocultas formadas por neuronas. En el caso de existir capas ocultas nos referimos a la red neuronal como perceptrón multicapa\footnote{\url{https://es.wikipedia.org/wiki/Perceptron\_multicapa}}.
 
-\imagen{perceptron_multicapa}{Diagrama de un  perceptrón multicapa}
-%\captionDiagrama de un  perceptrón multicapa]{Extra ido de \url{https://es.wikipedia.org/wiki/Perceptron\_multicapa}}
+\FloatBarrier
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.9\textwidth]{perceptron_multicapa}
+\caption[Diagrama de un  perceptrón multicapa]{Diagrama de un  perceptrón multicapa. Imagen extraída de
+\newline
+\url{https://es.wikipedia.org/wiki/Perceptron\_multicapa}}
+\label{fig}
+\end{figure}
+\FloatBarrier
 
 \section{Minería de datos}
 
@@ -82,17 +105,54 @@ El proceso típico de minería de datos está constituido por los siguientes pas
 \begin{description}
     \item[Redes neuronales] Tal y como se han descrito anteriormente, esta técnica de procesamiento automático y los diferentes tipos de red neuronal (perceptrón y perceptrón multicapa) son una técnica utilizada en la minería de datos.
     \item[Regresión lineal] Técnica utilizada para identificar relaciones lineales entre dos variables.
-    \imagen{regresion_lineal}{Ejemplo de diagrama de regresión lineal}
+    
+    \FloatBarrier
+    \begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{regresion_lineal}
+    \caption[Ejemplo de diagrama de regresión lineal]{Ejemplo de diagrama de regresión lineal.
+    \newline
+    Imagen extraída de \url{https://es.wikipedia.org/wiki/Regresion\_lineal}}
+    \label{fig}
+    \end{figure}
+    \FloatBarrier
+    
     \item[Árboles de decisión] Modelo de predicción utilizado en el campo de la inteligencia artificial y el análisis predictivo\footnote{\url{https://es.wikipedia.org/wiki/Analisis\_predictivo}} donde a partir de un conjunto de datos se construyen diagramas para representar y categorizar condiciones de forma sucesiva hasta resolver el problema dado.
-    \imagen{arbol_decision}{Ejemplo de árbol de decisión}
+    
+    %\FloatBarrier
+    %\begin{figure}[!h]
+    %\centering
+    %\includegraphics[width=0.5\textwidth]{arbol_decision}
+    %\caption[Ejemplo de árbol de decisión]{Ejemplo de árbol de decisión.
+    %\newline
+    %Imagen extraída de
+    %\newline
+    %\url{https://hackernoon.com/what-is-a-decision-tree-in-machine-learning-15ce51dc445d}}
+    %\label{fig}
+    %\end{figure}
+    %\FloatBarrier
+    
     \item[Modelos estadísticos]Expresión o ecuación utilizada con el fin de indicar diferentes factores que modifican la variable de una respuesta.
-    \item[\english{Clustering}] Proceso de agrupación de una series de valores según un criterio de distancia o similitud.
-    \imagen{clustering}{Ejemplo de diagrama mostrando \english{clustering}}
     \item[Reglas de asociación] Procedimiento utilizado para reconocer hechos en común dentro de un conjunto de datos.
+    \item[\english{Clustering}] Proceso de agrupación de una series de valores según un criterio de distancia o similitud.
+    
+    \FloatBarrier
+    \begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{clustering}
+    \caption[Ejemplo de diagrama mostrando \english{clustering}]{Ejemplo de diagrama mostrando \english{clustering}.
+    \newline
+    Imagen extraída de \url{https://en.wikipedia.org/wiki/Cluster\_analysis}}
+    \label{fig}
+    \end{figure}
+    \FloatBarrier
+    
 \end{description}
 
 \section{Web Scraping}
 El \english{web scraping} es un a técnica utilizada para extraer información desde páginas web a través de uno o varias herramientas de software, estos programas simulan la navegación por el sitio web a la hora de extraer los datos deseados. La técnica de web \english{scraping} es muy utilizada a día de hoy por servicios como motores de búsqueda ya que es necesario para indexar la web, sin embargo, los principales usos de esta técnica son la transformación de datos sin estructurar que podemos encontrar en cualquier web en formato HTML\footnote{\url{https://es.wikipedia.org/wiki/HTML}} a estructuras de datos que pueden ser almacenados en bases de datos, hojas de cálculo, o en cualquier forma de almacenamiento estructurada \cite{wiki:web_scraping}.
+
+\newpage
 
 En cuanto a las técnicas utilizadas para realizar \english{web scraping} sobre un sitio web encontramos varios tipos en función del nivel de automatización del proceso:
 

@@ -2,10 +2,171 @@
 
 \section{Introducción}
 
+En esta sección se tratará de explicar todo el proceso de utilización de las herramientas que conforman el proyecto. Se tratará de especificar los requisitos técnicos necesarios para el buen funcionamiento, el proceso de instalación, y por último un manual de uso de las herramientas.
+
 \section{Requisitos de usuarios}
+
+A continuación se listan los requisitos técnicos necesarios para el correcto funcionamiento de las herramientas:
+
+\begin{itemize}
+    \item \textbf{Sistema operativo:} Necesario para la realización del proyecto. Se ha utilizado Windows 10, aunque en principio todas las librerías son compatibles con Linux.
+    \item \textbf{Conexión a internet:} Es necesario para realizar la extracción de datos y para ejecutar los  \english{notebooks} en Google Colab.
+    \item \textbf{Navegador Web:} Necesario para acceder a Google Colab. Se ha utilizado Google Chrome aunque cualquier navegador es compatible.
+    \item \textbf{Python 3.7:} Necesario para la ejecución del \english{web scraper}.
+    \item \textbf{Librerías:} Serán necesarias las librerías de las que hace uso el proyecto de Scrapy. Estas librerías son:
+        \begin{itemize}
+            \item Scrapy
+            \item js2xml
+            \item pypiwin32
+            \item Scrapy-UserAgents
+        \end{itemize}
+    \item \textbf{Proyecto:} Se deberá descargar el contenido del repositorio\footnote{\url{https://github.com/daniarnaizg/TFG-Amazon-Scraper}} donde se encuentran los archivos fuente del proyecto.
+\end{itemize}
 
 \section{Instalación}
 
+En este apartado se detalla el proceso de instalación necesario para el correcto funcionamiento del proyecto:
+
+\begin{itemize}
+    \item \textbf{Python:} Existen diversas formas de instalar Python en Windows:
+        \begin{itemize}
+            \item Método manual: Este método es sencillo y rápido.
+                \begin{enumerate}
+                    \item Descargar el instalador desde la web oficial de Python:
+                    \newline
+                    \url{https://www.python.org/downloads/}
+                    \newline
+                    Es importante que sea la versión 3.7.
+                    
+                    \imagen{anexos/python1}{Descarga de Python}
+                    
+                    \item Ejecutar el instalador y seguir los pasos que muestra.
+                \end{enumerate}
+            \item Anaconda: Método más complejo pero con algunos paquetes preinstalados.
+                \begin{enumerate}
+                    \item Descargar el instalador desde la web oficial de Anaconda:
+                    \newline
+                    \url{https://www.anaconda.com/distribution/#download-section}
+                    \newline
+                    Es importante que sea la versión 3.7.
+                    
+                    \imagen{anexos/anaconda1}{Descarga de Anaconda}
+                    
+                    \item Ejecutar el instalador y seguir los pasos que muestra.
+                \end{enumerate}
+        \end{itemize}
+        
+    \item \textbf{Librerías:} Una vez instalado Python, será necesario instalar las librerías de las que hace uso el proyecto de Scrapy. Para ello es necesario la instalación del gestor de paquetes PIP\footnote{\url{https://www.pypa.io/en/latest/}}. Si se ha instalado Python con el método Anaconda, este gestor ya estará instalado. En caso contrario se deberá instalar con los siguientes comandos:
+    
+\begin{verbatim}
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    python get-pip.py
+\end{verbatim}
+
+    Una vez PIP se encuentra operativo, se deberán instalar las librerías necesarias con los siguientes comandos:
+    \begin{verbatim}
+    pip install Scrapy
+    pip install js2xml
+    pip install pypiwin32
+    pip install Scrapy-UserAgents
+    \end{verbatim}
+    
+    \item \textbf{Descarga del proyecto:} Para descargar el proyecto existen dos formas:
+    \begin{itemize}
+        \item Descargar un fichero ZIP con el contenido del repositorio desde el siguiente enlace:
+        \newline
+        \url{https://github.com/daniarnaizg/TFG-Amazon-Scraper}
+        
+        \imagen{anexos/zip1}{Descarga del contenido del repositorio}
+        
+        \item Clonar el repositorio completo a través de Git con el siguiente comando:
+    \end{itemize}
+\end{itemize}
+
+\begin{verbatim}
+    git clone https://github.com/daniarnaizg/TFG-Amazon-Scraper.git
+\end{verbatim}
+
 \section{Manual del usuario}
 
+Se dividirá este manual en varias secciones:
 
+\subsection{Proceso de \english{web scraping}}
+
+En primer lugar será necesario tener el enlace de la página que contiene los productos a extraer, para ello basta con hacer una búsqueda en los departamentos de Amazon.com y una vez se tenga la categoría de los productos deseados, se anota la URL.
+
+\imagen{principal-hombres2}{Página que contiene los productos a extraer}
+
+En este caso se necesitará una URL para los productos para hombre, y otra para los productos para mujer. Un ejemplo podría ser el siguiente:
+
+\url{https://www.amazon.com/s?rh=n\%3A7141123011\%2Cn\%3A7147445011\%2Cn\%3A12035955011\%2Cn\%3A9103696011\%2Cn\%3A9056985011\%2Cn\%3A9056986011&page=2&qid=1562069588&ref=lp_9056986011_pg_2}
+
+El siguiente paso será modificar el código de la \english{spider} llamada <<urls\_spider>> para que utilice los enlaces que acabamos de anotar. Hay que cambiar el código directamente ya que las \english{spiders} de Scrapy no admiten ejecuciones parametrizadas a parte de la exportación de los resultados. El número de páginas que se desean extraer se basa en el valor de la variable llamada <<n\_pages>>.
+
+\imagen{anexos/urls1}{URLs introducidos en la \english{spider} encargada de extraer los enlaces de cada producto}
+
+El siguiente paso será la ejecución de esta \english{spider}, para ello es necesario situarse en la raíz del proyecto de Scrapy y ejecutar el siguiente comando:
+\begin{verbatim}
+    scrapy crawl urls_spider -o urls_output.json
+\end{verbatim}
+
+Es necesario que el archivo JSON que se pasa por parámetro tenga ese nombre ya que las siguientes \english{spiders} toman este archivo como punto de partida.
+
+\imagen{anexos/urls2}{\english{urls\_spider} ejecutada y en funcionamiento}
+
+Al finalizar este proceso, aparecerá un resumen con el número de elementos extraídos, el tiempo que ha necesitado, y demás información. En estos momentos ya se ha generado el primer JSON del proceso. Este JSON contiene los enlaces de los productos que contenía la URL.
+
+\imagen{anexos/urls3}{JSON que contiene los enlaces extraídos.}
+
+Es el momento de pasar al siguiente punto en el proceso de \english{web scraping}. En este segundo punto, se extraerán los principales campos de cada producto. El proceso a partir de aquí no requiere de nada más que la ejecución de comandos en la terminal.
+
+La primera \english{spider} que se va a ejecutar será la llamada <<products\_spider>>. Es la encargada de iterar sobre todos los enlaces extraídos en el paso anterior, y extraer los campos deseados por medio de expresiones regulares y XPath. También se encarga de extraer los enlaces de las imágenes de cada producto.
+
+Como en la anterior \english{spider}, se ejecuta con el siguiente comando:
+
+\begin{verbatim}
+    scrapy crawl products_spider -o products_output.json
+\end{verbatim}
+
+\imagen{anexos/products1}{Campos de un producto extraído durante la ejecución de la \english{spider}}
+
+Cada producto que se extrae queda automáticamente almacenado en la base de datos. No es necesario manipular nada para lograrlo. También se genera otro archivo JSON que se utilizará en la siguiente \english{spider}.
+
+El siguiente paso se basa en extraer los comentarios de cada producto, para ello partimos del fichero creado anteriormente <<products\_output.json>> y ejecutamos la \english{spider} llamada <<comments\_spider>> con el siguiente comando:
+
+\begin{verbatim}
+    scrapy crawl products_spider -o products_output.json
+\end{verbatim}
+
+\imagen{anexos/comments1}{Comentarios de un producto extraídos durante la ejecución de la \english{spider}}
+
+Al finalizar la ejecución, ya tendremos toda la información extraída de los productos deseados almacenada en la base de datos y los archivos JSON completos.
+Es el momento de guardar estos archivos para utilizarlos más adelante.
+
+Las rutas de estos archivos son las siguientes:
+\begin{itemize}
+    \item \textbf{/TFG-Amazon-Scraper/\_scrapy/amazon/urls\_output.json}
+    \item \textbf{/TFG-Amazon-Scraper/\_scrapy/amazon/products\_output.json}
+    \item \textbf{/TFG-Amazon-Scraper/\_scrapy/amazon/comments\_output.json}
+    \item \textbf{/TFG-Amazon-Scraper/databases/database.db}
+\end{itemize}
+
+Hay que recordar borrar el contenido de estos ficheros si se desea volver a ejecutar el proyecto de Scrapy.
+
+Todo este proceso se puede encontrar en formato vídeo, en el archivo llamado \english{1 - Proceso de Web Scraping - Scrapy.mp4} que se encuentra en el directorio <<Videos>> dentro del repositorio del proyecto.
+
+\subsection{Ejecución de \english{notebooks}}
+
+Tanto el proceso de entrenamiento de los clasificadores, como el de clasificación de imágenes se encuentran en \english{notebooks} pensados para ser ejecutados en el entorno remoto de Google Colab.
+
+Para ejecutar estos \english{notebooks} basta con importarlos en un nuevo cuaderno de Google Colab a través del siguiente enlace: \url{https://colab.research.google.com/}
+
+\imagen{anexos/colab1}{Subir \english{notebook} a Google Colab}
+
+\imagen{anexos/colab2}{\english{Notebook} de Google Colab abierto en el navegador web}
+
+Tanto los cuadernos de entrenamiento de los clasificadores, como el cuaderno general de clasificación, almacenamiento y visualización de los productos extraídos están pensados para ser ejecutados sin necesidad de cambiar el código.
+
+Para ello únicamente es necesario pulsar en el botón de ejecución de cada celda o pulsar la combinación de teclas \english{Shift + Enter}.
+
+\imagen{anexos/colab3}{Botón de ejecución de Google Colab}
