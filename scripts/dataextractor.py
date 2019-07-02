@@ -22,7 +22,6 @@ def main():
 
     for i in range(len(data) - 1):
 
-        # print(str(i))
         try:
             url = data[i]['content']
             label = data[i]['annotation']['labels'][0]
@@ -30,8 +29,6 @@ def main():
             print(str(i))
 
         image_name = label + '_' + str(i) + '.jpg'
-
-        # print(url, label, image_name)
         requestImg(image_name, url)
 
 

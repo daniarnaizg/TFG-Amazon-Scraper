@@ -2,7 +2,7 @@ import json
 from copy import deepcopy
 
 """
-Scripts que hace un merge de dos archivos JSON usando el campo url como elemento común.
+Scripts que hace un merge de dos archivos JSON usando el campo URL como elemento común.
 """
 
 def main():

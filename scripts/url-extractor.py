@@ -15,8 +15,6 @@ def main():
             urls = data[i]['image_urls']
             for j in urls:
                 urls_list.write(j + "\n")
-            # first_url = urls[0]
-            # urls_list.write(first_url + "\n")
 
 if __name__ == '__main__':
     main()
