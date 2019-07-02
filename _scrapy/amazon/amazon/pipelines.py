@@ -14,20 +14,13 @@ class AmazonPipeline(object):
         self.createTables()
 
     def setupDBConn(self):
-        self.conn = sqlite3.connect('../../databases/prueba-prices.db')
+        self.conn = sqlite3.connect('../../databases/database.db')
         self.curr = self.conn.cursor()
 
     def createTables(self):
-        # self.dropAmazonTables()
         self.createAmazonTable()
         self.createImagesTable()
         self.createCommentsTable()
-
-    def dropAmazonTables(self):
-        # drop tables if it exists
-        # self.curr.execute("DROP TABLE IF EXISTS PRODUCTOS")
-        # self.curr.execute("DROP TABLE IF EXISTS IMAGENES")
-        self.curr.execute("DROP TABLE IF EXISTS COMENTARIOS")
 
     def closeDB(self):
         self.conn.close()

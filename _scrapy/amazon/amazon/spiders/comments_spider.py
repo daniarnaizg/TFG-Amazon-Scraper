@@ -12,7 +12,7 @@ class CommentsSpider(scrapy.Spider):
 
     list_urls = []
     try:
-        with open('./products-output.json') as json_data:
+        with open('./products_output.json') as json_data:
             products = json.load(json_data)
             for i in range(len(products)):
                 asin = products[i]['asin']
@@ -20,17 +20,21 @@ class CommentsSpider(scrapy.Spider):
                     list_urls.append(urljoin('https://www.amazon.com/','product-reviews/' + asin + '/ref=cm_cr_arp_d_paging_btm_next_2?pageNumber=' + str(n)))
             start_urls = list_urls
     except:
-        pass
+        print('Error con el archivo de entrada.')
 
     def parse(self, response):
 
         item = AmazonItem()
+
+        # ASIN
         item['asin'] = re.search(r"/\w{10}/", response.url).group(0).strip('/')
 
+        # Comentarios
         raw_comments = response.xpath("//*[contains(@class, 'a-row a-spacing-small review-data')]/span/span").extract()
         comment_list = []
         for i in raw_comments:
-            comment_list.append(re.sub('<.*?>', '', i))     # Regular expression to delete all html tags
+            comment_list.append(re.sub('<.*?>', '', i))     # Expresión regular para eliminar todos los tags HTML
         item['comments'] = comment_list
 
+        # OUTPUT
         yield item

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-import scrapy, re
+import scrapy
+import re
 from urllib.parse import urljoin
 
 
@@ -9,29 +10,37 @@ class UrlsSpider(scrapy.Spider):
     n_pages = 1
 
     men_urls = [
-        'https://www.amazon.com/s/ref=sr_pg_2?fst=as%3Aoff&rh=n%3A16225019011%2Cn%3A1040658%2Cn%3A15697821011%2Cn%3A1045624&bbn=16225019011&ie=UTF8&qid=1548234697&ajr=3&page={}' .format(i) for i in range(1, n_pages+1)]
-    
+        'https://www.amazon.com/s?rh=n%3A7141123011%2Cn%3A7147445011%2Cn%3A12035955011%2Cn%3A9103696011%2Cn%3A9056985011%2Cn%3A9056986011&page={}&qid=1562069588&ref=lp_9056986011_pg_2' .format(i) for i in range(1, n_pages+1)]
+
     women_urls = [
-        'https://www.amazon.com/s?rh=n%3A7141123011%2Cn%3A7147445011%2Cn%3A12035955011%2Cn%3A9103696011%2Cn%3A9056921011%2Cn%3A9056922011%2Cn%3A9056923011&page={}' .format(i) for i in range(1, n_pages+1)]
-    
+        'https://www.amazon.com/s?rh=n%3A7141123011%2Cn%3A7147445011%2Cn%3A12035955011%2Cn%3A9103696011%2Cn%3A9056921011%2Cn%3A9056922011&page={}&qid=1562070225&ref=lp_9056922011_pg_2' .format(i) for i in range(1, n_pages+1)]
+
     start_urls = men_urls + women_urls
 
     def parse(self, response):
-        # urls = response.xpath('//a[@class="a-link-normal s-access-detail-page  s-color-twister-title-link a-text-normal"]/@href').extract()
+
+        # ENLACE
         urls = response.xpath(
             '//a[@class="a-link-normal a-text-normal"]/@href').extract()
 
         url_list = []
 
         for i in urls:
-            # url = urljoin(response.url, i)
-            asin = re.search(r"/\w{10}/", i)
-            if asin is not None:
-                if response.url in self.women_urls:               
-                    url_list.append(urljoin('https://www.amazon.com/','dp/' + asin.group(0).strip('/') + '/F'))
-                else:
-                    url_list.append(urljoin('https://www.amazon.com/','dp/' + asin.group(0).strip('/') + '/M'))
+            asin = re.search(r"/\w{10}/", i) # Se extrae el ASIN de la URL por medio de una expresión regular.
 
+            # Se añade al final de la url un campo para identificar si el producto proviene de la página para hombres
+            # o para mujeres. Este campo no influye en la redirección y nos sirve para sacar el campo 'sexo'
+            # en el siguiente spider.
+            if asin is not None:
+                if asin is not '/slredirect/':
+                    if response.url in self.women_urls:
+                        url_list.append(
+                            urljoin('https://www.amazon.com/', 'dp/' + asin.group(0).strip('/') + '/F'))
+                    else:
+                        url_list.append(
+                            urljoin('https://www.amazon.com/', 'dp/' + asin.group(0).strip('/') + '/M'))
+
+        # OUTPUT
         yield{
-            'page_urls': list(set(url_list)) # PARA QUITAR DUPLICADOS
+            'page_urls': list(set(url_list))  # Para quitar duplicados
         }
