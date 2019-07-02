@@ -7,7 +7,7 @@ from urllib.parse import urljoin
 class UrlsSpider(scrapy.Spider):
     name = 'urls_spider'
     allowed_domains = ['amazon.com']
-    n_pages = 1
+    n_pages = 2
 
     men_urls = [
         'https://www.amazon.com/s?rh=n%3A7141123011%2Cn%3A7147445011%2Cn%3A12035955011%2Cn%3A9103696011%2Cn%3A9056985011%2Cn%3A9056986011&page={}&qid=1562069588&ref=lp_9056986011_pg_2' .format(i) for i in range(1, n_pages+1)]
