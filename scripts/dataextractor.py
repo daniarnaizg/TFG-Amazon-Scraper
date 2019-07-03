@@ -6,7 +6,7 @@ from io import BytesIO
 Script que descarga imagenes dada su URL y las renombra en funcion de cómo han sido etiquetadas.
 """
 
-def requestImg(image_name, url):
+def request_img(image_name, url):
     r = requests.get(url)
     i = Image.open(BytesIO(r.content))
     
@@ -29,7 +29,7 @@ def main():
             print(str(i))
 
         image_name = label + '_' + str(i) + '.jpg'
-        requestImg(image_name, url)
+        request_img(image_name, url)
 
 
 if __name__ == '__main__':

@@ -31,14 +31,13 @@ class UrlsSpider(scrapy.Spider):
             # Se añade al final de la url un campo para identificar si el producto proviene de la página para hombres
             # o para mujeres. Este campo no influye en la redirección y nos sirve para sacar el campo 'sexo'
             # en el siguiente spider.
-            if asin is not None:
-                if asin is not '/slredirect/':
-                    if response.url in self.women_urls:
-                        url_list.append(
-                            urljoin('https://www.amazon.com/', 'dp/' + asin.group(0).strip('/') + '/F'))
-                    else:
-                        url_list.append(
-                            urljoin('https://www.amazon.com/', 'dp/' + asin.group(0).strip('/') + '/M'))
+            if asin is not None and asin is not '/slredirect/':
+                if response.url in self.women_urls:
+                    url_list.append(
+                        urljoin('https://www.amazon.com/', 'dp/' + asin.group(0).strip('/') + '/F'))
+                else:
+                    url_list.append(
+                        urljoin('https://www.amazon.com/', 'dp/' + asin.group(0).strip('/') + '/M'))
 
         # OUTPUT
         yield{

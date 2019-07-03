@@ -10,25 +10,25 @@ import sqlite3
 class AmazonPipeline(object):
 
     def __init__(self):
-        self.setupDBConn()
-        self.createTables()
+        self.setup_db_conn()
+        self.create_tables()
 
-    def setupDBConn(self):
+    def setup_db_conn(self):
         self.conn = sqlite3.connect('../../databases/database.db')
         self.curr = self.conn.cursor()
 
-    def createTables(self):
-        self.createAmazonTable()
-        self.createImagesTable()
-        self.createCommentsTable()
+    def create_tables(self):
+        self.create_amazon_table()
+        self.create_images_table()
+        self.create_comments_table()
 
-    def closeDB(self):
+    def close_db(self):
         self.conn.close()
 
     def __del__(self):
-        self.closeDB()
+        self.close_db()
 
-    def createAmazonTable(self):
+    def create_amazon_table(self):
         self.curr.execute("""CREATE TABLE IF NOT EXISTS PRODUCTOS(
                         asin TEXT PRIMARY KEY NOT NULL,
                         sex TEXT,
@@ -41,14 +41,14 @@ class AmazonPipeline(object):
                         )""")
 
 
-    def createImagesTable(self):
+    def create_images_table(self):
         self.curr.execute("""CREATE TABLE IF NOT EXISTS IMAGENES(
                         asin TEXT FOREING KEY NOT NULL,
                         url TEXT
                         )""")
 
 
-    def createCommentsTable(self):
+    def create_comments_table(self):
         self.curr.execute("""CREATE TABLE IF NOT EXISTS COMENTARIOS(
                         asin TEXT FOREING KEY NOT NULL,
                         comment TEXT
@@ -57,15 +57,15 @@ class AmazonPipeline(object):
     def process_item(self, item, spider):
         # Para saber si se trata de un producto
         if 'description' in item:
-            self.storeProductInDb(item)
-            self.storeImagesInDb(item)
+            self.store_product_in_db(item)
+            self.store_images_in_db(item)
             print ('--------------------------')
             print ('Product stored in Database')
             print ('--------------------------')
 
         # Para saber si se trata de un comentario
         if 'comments' in item:
-            self.storeCommentsInDb(item)
+            self.store_comments_in_db(item)
             print ('--------------------------')
             print ('Comment stored in Database')
             print ('--------------------------')
@@ -75,7 +75,7 @@ class AmazonPipeline(object):
 
         return item
 
-    def storeProductInDb(self, item):
+    def store_product_in_db(self, item):
         self.curr.execute("""INSERT INTO PRODUCTOS VALUES( ?, ?, ?, ?, ?, ?, ?, ?)""",(
             item['asin'],
             item['sex'],
@@ -88,7 +88,7 @@ class AmazonPipeline(object):
         ))
         self.conn.commit()
 
-    def storeImagesInDb(self, item):
+    def store_images_in_db(self, item):
         for i in range(len(item['image_urls'])):
             self.curr.execute("""INSERT INTO IMAGENES VALUES( ?, ?)""",(
                 item['asin'],
@@ -96,7 +96,7 @@ class AmazonPipeline(object):
             ))
             self.conn.commit()
 
-    def storeCommentsInDb(self, item):
+    def store_comments_in_db(self, item):
         for i in range(len(item['comments'])):
             self.curr.execute("""INSERT INTO COMENTARIOS VALUES( ?, ?)""",(
                 item['asin'],
