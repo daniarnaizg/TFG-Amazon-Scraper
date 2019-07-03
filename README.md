@@ -3,7 +3,7 @@
 # Extracción y procesamiento de datos de Amazon para su utilización en un estudio de marketing
 ## TFG del Grado en Ingeniería Informática en la Universidad de Burgos. Curso 2018-19
 
-Relaizado por:
+Realizado por:
 *  Daniel Arnaiz Gutierrez
 
 Tutores:
