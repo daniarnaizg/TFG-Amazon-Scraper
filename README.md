@@ -12,15 +12,15 @@ Tutores:
 
 ### Resumen
 
-El principal objetivo de este proyecto es la recolección de datos de determinados productos del sitio web <<Amazon.com>> para después procesar y almacenar los resultados de forma relacional. Además, parte de este proceso consiste en, dada una imagen del producto, etiquetarla de forma automática según las características de esta.
+El principal objetivo de este proyecto es la recolección de datos de determinados productos del sitio web <em>Amazon.com</em> para después procesar y almacenar los resultados de forma relacional. Además, parte de este proceso consiste en, dada una imagen del producto, etiquetarla de forma automática según las características de esta.
 
 Para realizar la parte de la recolección de datos se utilizará una técnica de minería de datos llamada \english{web scraping} y para el procesado y etiquetado de las imágenes se harán uso de redes neuronales, otra rama de la minería de datos.
 
-Los resultados, tanto del \english{scraper} como del clasificador de imágenes, serán almacenados en una base de datos para su posterior uso en estudios de marketing.
+Los resultados, tanto del <em>scraper</em> como del clasificador de imágenes, serán almacenados en una base de datos para su posterior uso en estudios de marketing.
 
 ### Abstract
 
-The main objective of this project is the data collection of certain products in the website <<Amazon.com>> to later on process and store the result in a relational way. In addition to this, part of this process consists of, given a product image, label it automatically depending of its characteristics.
+The main objective of this project is the data collection of certain products in the website <em>Amazon.com</em> to later on process and store the result in a relational way. In addition to this, part of this process consists of, given a product image, label it automatically depending of its characteristics.
 
 To perform the part in which the data is collected, a data mining technique called web scraping will be used. Also, for the processing and labeling of the images, neuronal networks will be used, which is another branch of data mining.
 
