@@ -14,7 +14,7 @@ Tutores:
 
 El principal objetivo de este proyecto es la recolección de datos de determinados productos del sitio web <em>Amazon.com</em> para después procesar y almacenar los resultados de forma relacional. Además, parte de este proceso consiste en, dada una imagen del producto, etiquetarla de forma automática según las características de esta.
 
-Para realizar la parte de la recolección de datos se utilizará una técnica de minería de datos llamada \english{web scraping} y para el procesado y etiquetado de las imágenes se harán uso de redes neuronales, otra rama de la minería de datos.
+Para realizar la parte de la recolección de datos se utilizará una técnica de minería de datos llamada <em>web scraping</em> y para el procesado y etiquetado de las imágenes se harán uso de redes neuronales, otra rama de la minería de datos.
 
 Los resultados, tanto del <em>scraper</em> como del clasificador de imágenes, serán almacenados en una base de datos para su posterior uso en estudios de marketing.
 
